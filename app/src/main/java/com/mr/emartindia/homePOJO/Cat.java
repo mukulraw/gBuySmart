@@ -13,9 +13,9 @@ public class Cat {
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("description")
+    @SerializedName("space")
     @Expose
-    private String description;
+    private String space;
     @SerializedName("tag")
     @Expose
     private String tag;
@@ -44,12 +44,12 @@ public class Cat {
         this.image = image;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSpace() {
+        return space;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSpace(String space) {
+        this.space = space;
     }
 
     public String getTag() {

@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager3 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager4 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager6 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        LinearLayoutManager manager5 = new GridLayoutManager(this, 3);
-        LinearLayoutManager manager7 = new GridLayoutManager(this, 1);
+        GridLayoutManager manager5 = new GridLayoutManager(this, 3);
+        GridLayoutManager manager7 = new GridLayoutManager(this, 1);
 
         recent.setAdapter(adapter2);
         recent.setLayoutManager(manager1);
@@ -163,6 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
         essentails.setAdapter(adapter4);
         essentails.setLayoutManager(manager3);
+
+        manager5.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int i) {
+                return Integer.parseInt(adapter6.getSpace(i));
+            }
+        });
 
 
         categories.setAdapter(adapter6);
@@ -348,6 +355,11 @@ public class MainActivity extends AppCompatActivity {
             this.list = list;
             notifyDataSetChanged();
         }
+
+        String getSpace(int position) {
+            return list.get(position).getSpace();
+        }
+
 
         @NonNull
         @Override
