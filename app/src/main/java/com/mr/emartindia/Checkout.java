@@ -114,7 +114,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
             }
         });
 
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.BLACK);
         toolbar.setTitle("Checkout");
 
 

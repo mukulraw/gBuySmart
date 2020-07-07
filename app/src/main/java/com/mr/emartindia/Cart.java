@@ -86,7 +86,7 @@ public class Cart extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.BLACK);
         toolbar.setTitle("Cart");
 
         adapter = new CartAdapter(list, this);

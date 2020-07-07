@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/shade"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,11 +29,11 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="4dp"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="?attr/actionBarTheme"
                     app:subtitleTextColor="#000"
                     app:title="@string/app_name"
-                    android:elevation="4dp"
                     app:titleTextColor="#000">
 
                     <LinearLayout
@@ -48,7 +49,7 @@
                             android:layout_gravity="center_vertical"
                             android:text="eMartIndia"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="20sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -122,7 +123,7 @@
                             android:layout_centerInParent="true"
                             android:layout_marginTop="9dp"
                             android:layout_marginBottom="9dp"
-                            app:cardCornerRadius="10dp">
+                            app:cardCornerRadius="30dp">
 
                             <TextView
                                 android:id="@+id/location"
@@ -131,9 +132,9 @@
                                 android:background="@drawable/white_round"
                                 android:gravity="center"
                                 android:paddingStart="22dp"
-                                android:paddingTop="6dp"
+                                android:paddingTop="8dp"
                                 android:paddingEnd="22dp"
-                                android:paddingBottom="6dp"
+                                android:paddingBottom="8dp"
                                 android:text="West Delhi"
                                 android:textColor="#FF6000">
 
@@ -147,16 +148,16 @@
                             android:layout_alignParentRight="true"
                             android:layout_gravity="right"
                             android:layout_marginTop="9dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginRight="12dp">
+                            android:layout_marginRight="12dp"
+                            app:cardCornerRadius="15dp">
 
                             <TextView
                                 android:id="@+id/lang"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:background="@drawable/round"
                                 android:padding="8dp"
                                 android:text="EN"
-                                android:background="@drawable/round"
                                 android:textColor="#000"
                                 android:textSize="11sp">
 
@@ -166,54 +167,66 @@
 
                     </RelativeLayout>
 
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:focusableInTouchMode="true">
+                        android:focusableInTouchMode="true"
+                        app:cardCornerRadius="15dp">
 
-                        <com.santalu.autoviewpager.AutoViewPager
-                            android:id="@+id/viewPager"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="180dp"
-                            android:background="@drawable/white_round"
-                            app:avp_autoScroll="true"
-                            app:avp_duration="2000"
-                            app:avp_indeterminate="true"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:layout_height="180dp">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/viewPager"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="22dp"
-                            android:layout_marginBottom="22dp">
+                            <com.santalu.autoviewpager.AutoViewPager
+                                android:id="@+id/viewPager"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp"
+                                app:avp_autoScroll="true"
+                                app:avp_duration="2000"
+                                app:avp_indeterminate="true"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <EditText
                                 android:id="@+id/search"
-                                android:layout_width="130dp"
-                                android:layout_height="35dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="8dp"
                                 android:background="@drawable/white_round"
-                                android:focusable="false"
                                 android:ellipsize="start"
+                                android:focusable="false"
+                                android:longClickable="false"
                                 android:gravity="center"
-                                android:hint="SEARCH"
-                                >
+                                android:text="SEARCH"
+                                android:paddingStart="20dp"
+                                android:paddingTop="5dp"
+                                android:paddingEnd="20dp"
+                                android:paddingBottom="5dp"
+                                android:textSize="14sp" />
 
-                            </EditText>
+                            <me.relex.circleindicator.CircleIndicator
+                                android:id="@+id/indicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="8dp" />
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                    </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="12dp"
                         android:text="Categories"
                         android:textColor="#02425A">
@@ -224,9 +237,9 @@
                         android:id="@+id/categories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
                         android:nestedScrollingEnabled="false"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -234,58 +247,35 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
                         android:background="#c0c0c0" />
 
-                    <androidx.cardview.widget.CardView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/banner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
-                        app:cardCornerRadius="12dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/banner1" />
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
-                        app:cardCornerRadius="12dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/banner2" />
-                    </androidx.cardview.widget.CardView>
+                        android:layout_marginBottom="8dp"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
                         android:background="#c0c0c0" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        app:cardCornerRadius="12dp">
+                        app:cardCornerRadius="15dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -295,7 +285,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp"
+                                android:layout_marginLeft="18dp"
                                 android:layout_marginTop="12dp"
                                 android:text="eMartIndia Credit"
                                 android:textColor="#02425A">
@@ -311,7 +301,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginLeft="8dp"
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:text="Total approved limit">
@@ -328,8 +318,8 @@
                                         android:layout_width="13dp"
                                         android:layout_height="13dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginTop="6dp"
-                                        android:src="@drawable/rupee"></ImageView>
+                                        android:layout_marginTop="8dp"
+                                        android:src="@drawable/rupee" />
 
                                     <TextView
                                         android:id="@+id/totl_limit"
@@ -355,7 +345,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginLeft="8dp"
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:text="Utilized limit">
@@ -373,7 +363,7 @@
                                         android:layout_width="13dp"
                                         android:layout_height="13dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginTop="6dp"
+                                        android:layout_marginTop="8dp"
                                         android:src="@drawable/rupee2"></ImageView>
 
                                     <TextView
@@ -398,7 +388,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginLeft="8dp"
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:text="Available limit">
@@ -416,7 +406,7 @@
                                         android:layout_width="13dp"
                                         android:layout_height="13dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginTop="6dp"
+                                        android:layout_marginTop="8dp"
                                         android:src="@drawable/rupee"></ImageView>
 
                                     <TextView
@@ -436,17 +426,17 @@
                                 android:id="@+id/get_details"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:minHeight="0dp"
-                                android:minWidth="0dp"
                                 android:layout_gravity="right"
                                 android:layout_marginTop="12dp"
                                 android:layout_marginRight="12dp"
                                 android:layout_marginBottom="12dp"
                                 android:background="@drawable/round2"
-                                android:paddingStart="16dp"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:paddingStart="18dp"
                                 android:paddingTop="4dp"
+                                android:paddingEnd="18dp"
                                 android:paddingBottom="4dp"
-                                android:paddingEnd="16dp"
                                 android:text="GET DETAILS"
                                 android:textColor="@color/colorAccent" />
 
@@ -456,16 +446,16 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="#c0c0c0" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:text="Recently Bought Items by Customers"
                         android:textColor="#02425A">
@@ -476,15 +466,15 @@
                         android:id="@+id/recent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:text="Most loved items"
                         android:textColor="#02425A">
 
@@ -494,15 +484,15 @@
                         android:id="@+id/loved"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:text="Stay safe &amp; protected "
                         android:textColor="#02425A">
 
@@ -512,15 +502,15 @@
                         android:id="@+id/safe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:text="Save on daily essentials"
                         android:textColor="#02425A">
 
@@ -530,15 +520,15 @@
                         android:id="@+id/essentials"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:text="Top brands"
                         android:textColor="#02425A">
 
@@ -548,18 +538,18 @@
                         android:id="@+id/top"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
-                        app:cardCornerRadius="12dp">
+                        app:cardCornerRadius="15dp">
 
                         <ImageView
                             android:layout_width="match_parent"

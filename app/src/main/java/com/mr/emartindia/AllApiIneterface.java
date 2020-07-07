@@ -21,55 +21,55 @@ import retrofit2.http.Part;
 public interface AllApiIneterface {
 
 
-    @GET("janathabazaar/api/getHome.php")
+    @GET("emartindia/api/getHome.php")
     Call<homeBean> getHome();
 
     @Multipart
-    @POST("janathabazaar/api/getSubCat1.php")
+    @POST("emartindia/api/getSubCat1.php")
     Call<subCat1Bean> getSubCat1(
             @Part("cat") String cat
     );
 
     @Multipart
-    @POST("janathabazaar/api/getSubCat2.php")
+    @POST("emartindia/api/getSubCat2.php")
     Call<subCat1Bean> getSubCat2(
             @Part("subcat1") String cat
     );
 
     @Multipart
-    @POST("janathabazaar/api/getProducts.php")
+    @POST("emartindia/api/getProducts.php")
     Call<productsBean> getProducts(
             @Part("subcat2") String cat
     );
 
     @Multipart
-    @POST("janathabazaar/api/getProductById.php")
+    @POST("emartindia/api/getProductById.php")
     Call<singleProductBean> getProductById(
             @Part("id") String cat
     );
 
     @Multipart
-    @POST("janathabazaar/api/search.php")
+    @POST("emartindia/api/search.php")
     Call<searchBean> search(
             @Part("query") String query
     );
 
     @Multipart
-    @POST("janathabazaar/api/login.php")
+    @POST("emartindia/api/login.php")
     Call<loginBean> login(
             @Part("phone") String phone,
             @Part("token") String token
     );
 
     @Multipart
-    @POST("janathabazaar/api/verify.php")
+    @POST("emartindia/api/verify.php")
     Call<loginBean> verify(
             @Part("phone") String phone,
             @Part("otp") String otp
     );
 
     @Multipart
-    @POST("janathabazaar/api/addCart.php")
+    @POST("emartindia/api/addCart.php")
     Call<singleProductBean> addCart(
             @Part("user_id") String user_id,
             @Part("product_id") String product_id,
@@ -79,7 +79,7 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("janathabazaar/api/updateCart.php")
+    @POST("emartindia/api/updateCart.php")
     Call<singleProductBean> updateCart(
             @Part("id") String id,
             @Part("quantity") String quantity,
@@ -87,62 +87,62 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("janathabazaar/api/deleteCart.php")
+    @POST("emartindia/api/deleteCart.php")
     Call<singleProductBean> deleteCart(
             @Part("id") String id
     );
 
     @Multipart
-    @POST("janathabazaar/api/getRew.php")
+    @POST("emartindia/api/getRew.php")
     Call<String> getRew(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/clearCart.php")
+    @POST("emartindia/api/clearCart.php")
     Call<singleProductBean> clearCart(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/getOrderDetails.php")
+    @POST("emartindia/api/getOrderDetails.php")
     Call<orderDetailsBean> getOrderDetails(
             @Part("order_id") String order_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/getCart.php")
+    @POST("emartindia/api/getCart.php")
     Call<cartBean> getCart(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/getOrders.php")
+    @POST("emartindia/api/getOrders.php")
     Call<ordersBean> getOrders(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/getAddress.php")
+    @POST("emartindia/api/getAddress.php")
     Call<addressBean> getAddress(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/deleteAddress.php")
+    @POST("emartindia/api/deleteAddress.php")
     Call<addressBean> deleteAddress(
             @Part("id") String id
     );
 
     @Multipart
-    @POST("janathabazaar/api/checkPromo.php")
+    @POST("emartindia/api/checkPromo.php")
     Call<checkPromoBean> checkPromo(
             @Part("promo") String promo,
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("janathabazaar/api/buyVouchers.php")
+    @POST("emartindia/api/buyVouchers.php")
     Call<checkoutBean> buyVouchers(
             @Part("user_id") String user_id,
             @Part("amount") String amount,

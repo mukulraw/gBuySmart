@@ -64,7 +64,7 @@ public class Orders extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.BLACK);
         toolbar.setTitle("My Orders");
 
         adapter = new OrdersAdapter(list, this);

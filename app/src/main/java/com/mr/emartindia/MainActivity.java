@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     AutoViewPager pager;
     ProgressBar progress;
     CircleIndicator indicator;
-    RecyclerView categories, recent, loved, safe, essentails, top;
+    RecyclerView categories, recent, loved, safe, essentails, top , banner;
     BestAdapter adapter2, adapter3;
     BestAdapter adapter4;
     BestAdapter adapter5;
@@ -86,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
     List<Best> list1;
     List<Best> list2;
     List<Cat> list3;
-    TextView count, rewards, login, terms, about, address, logout, cart;
+    List<Banners> list4;
+    TextView count, rewards, login, terms, about, address, logout, cart , orders;
     ImageButton cart1;
     EditText search;
+    OfferAdapter adapter;
 
 
     @Override
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
+        orders = findViewById(R.id.orders);
+        indicator = findViewById(R.id.indicator);
+        banner = findViewById(R.id.banner);
         pager = findViewById(R.id.viewPager);
         progress = findViewById(R.id.progress);
         // indicator = findViewById(R.id.indicator);
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
         list3 = new ArrayList<>();
+        list4 = new ArrayList<>();
 
         setSupportActionBar(toolbar);
 
@@ -133,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
 
+        adapter = new OfferAdapter(this, list4);
         adapter2 = new BestAdapter(this, list);
         adapter3 = new BestAdapter(this, list);
         adapter4 = new BestAdapter(this, list1);
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager4 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager6 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager5 = new GridLayoutManager(this, 3);
+        LinearLayoutManager manager7 = new GridLayoutManager(this, 1);
 
         recent.setAdapter(adapter2);
         recent.setLayoutManager(manager1);
@@ -165,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
         top.setAdapter(adapter7);
         top.setLayoutManager(manager6);
+
+        banner.setAdapter(adapter);
+        banner.setLayoutManager(manager7);
 
         final String uid = SharePreferenceUtils.getInstance().getString("userId");
 
@@ -304,6 +315,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (uid.length() > 0) {
+                    Intent intent = new Intent(MainActivity.this, Orders.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "Please login to continue", Toast.LENGTH_SHORT).show();
+                }
+
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
 
     }
 
@@ -415,8 +442,7 @@ public class MainActivity extends AppCompatActivity {
 
                     BannerAdapter adapter1 = new BannerAdapter(getSupportFragmentManager(), response.body().getPbanner());
                     pager.setAdapter(adapter1);
-
-                    //indicator.setViewPager(pager);
+                    indicator.setViewPager(pager);
 
                     adapter2.setData(response.body().getBest());
                     adapter3.setData(response.body().getToday());
@@ -424,6 +450,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter5.setData(response.body().getToday());
                     adapter7.setData(response.body().getToday());
                     adapter6.setData(response.body().getCat());
+                    adapter.setData(response.body().getObanner());
 
                 }
 
@@ -802,7 +829,7 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView image;
             TextView price, title, discount, stock;
-            TextView add;
+            Button add;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
