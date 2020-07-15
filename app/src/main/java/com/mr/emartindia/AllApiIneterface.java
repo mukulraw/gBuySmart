@@ -58,7 +58,8 @@ public interface AllApiIneterface {
     @POST("emartindia/api/login.php")
     Call<loginBean> login(
             @Part("phone") String phone,
-            @Part("token") String token
+            @Part("token") String token,
+            @Part("referrer") String referrer
     );
 
     @Multipart
