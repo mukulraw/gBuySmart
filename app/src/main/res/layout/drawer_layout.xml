@@ -32,7 +32,7 @@
         android:padding="10dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:text="eWALLET - "
+        android:text="eCash - "
         android:gravity="end"
         android:textColor="#ffffff"
         android:textStyle="bold"
@@ -72,6 +72,8 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="West Delhi"
+            android:drawableStart="@drawable/ic_pin"
+            android:drawablePadding="22dp"
             android:id="@+id/home"
             />
 
@@ -85,6 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="My Cart"
+            android:drawableStart="@drawable/ic_shopping_bag"
+            android:drawablePadding="22dp"
             android:id="@+id/cart"
             android:padding="15dp"
             />
@@ -103,6 +107,8 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="My Orders"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_format_list_bulleted_black_24dp"
             android:id="@+id/orders"
             />
 
@@ -111,6 +117,8 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="My Addresses"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_home_black_24dp"
             android:id="@+id/address"
             />
 
@@ -146,6 +154,8 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="Terms &amp; Conditions"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_assignment_black_24dp"
             android:visibility="visible"
             android:id="@+id/terms"
             />
@@ -157,6 +167,8 @@
             android:padding="15dp"
             android:text="About Us"
             android:visibility="visible"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_help_black_24dp"
             android:id="@+id/about"
             />
 
@@ -173,6 +185,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_power_settings_new_black_24dp"
             android:text="Logout" />
 
     </LinearLayout>

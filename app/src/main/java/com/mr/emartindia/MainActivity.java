@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     AutoViewPager pager;
     ProgressBar progress;
     CircleIndicator indicator;
-    RecyclerView categories, recent, loved, safe, essentails, top , banner;
+    RecyclerView categories, recent, loved, safe, essentails, top, banner;
     BestAdapter adapter2, adapter3;
     BestAdapter adapter4;
     BestAdapter adapter5;
@@ -87,11 +87,12 @@ public class MainActivity extends AppCompatActivity {
     List<Best> list2;
     List<Cat> list3;
     List<Banners> list4;
-    TextView count, rewards, login, terms, about, address, logout, cart , orders;
+    TextView count, rewards, login, terms, about, address, logout, cart, orders;
     ImageButton cart1;
     EditText search;
     OfferAdapter adapter;
 
+    ImageView banner1, banner2, banner3, banner4, banner5, banner6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
+        banner1 = findViewById(R.id.banner1);
+        banner2 = findViewById(R.id.banner2);
+        banner3 = findViewById(R.id.banner3);
+        banner4 = findViewById(R.id.banner4);
+        banner5 = findViewById(R.id.banner5);
+        banner6 = findViewById(R.id.banner6);
+
         orders = findViewById(R.id.orders);
         indicator = findViewById(R.id.indicator);
         banner = findViewById(R.id.banner);
@@ -188,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (uid.length() > 0) {
             login.setText(SharePreferenceUtils.getInstance().getString("phone"));
-            rewards.setText("REWARD POINTS - " + SharePreferenceUtils.getInstance().getString("rewards"));
+            rewards.setText("eCash - " + SharePreferenceUtils.getInstance().getString("rewards"));
             //rewards.setVisibility(View.VISIBLE);
             getRew();
         } else {
@@ -462,7 +470,83 @@ public class MainActivity extends AppCompatActivity {
                     adapter5.setData(response.body().getToday());
                     adapter7.setData(response.body().getToday());
                     adapter6.setData(response.body().getCat());
-                    adapter.setData(response.body().getObanner());
+
+                    Log.d("ssiizzee", String.valueOf(response.body().getObanner().size()));
+
+
+
+
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(0).getImage();
+                        loader.displayImage(url, banner1, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(1).getImage();
+                        loader.displayImage(url, banner2, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(2).getImage();
+                        loader.displayImage(url, banner3, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(3).getImage();
+                        loader.displayImage(url, banner4, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(4).getImage();
+                        loader.displayImage(url, banner5, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+                        ImageLoader loader = ImageLoader.getInstance();
+                        String url = response.body().getObanner().get(5).getImage();
+                        loader.displayImage(url, banner6, options);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (response.body().getObanner().size() > 6) {
+                        List<Banners> ll = response.body().getObanner();
+                        ll.remove(0);
+                        ll.remove(0);
+                        ll.remove(0);
+                        ll.remove(0);
+                        ll.remove(0);
+                        ll.remove(0);
+                        adapter.setData(ll);
+                    }
 
                 }
 
@@ -941,7 +1025,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                rewards.setText("e WALLET - " + response.body());
+                rewards.setText("eCash - " + response.body());
 
                 progress.setVisibility(View.GONE);
 

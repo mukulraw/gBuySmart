@@ -27,6 +27,8 @@
         android:layout_height="35dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        app:stepperBackgroundColor="@color/colorAccent"
+        app:stepperTextColor="@color/colorAccent"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
