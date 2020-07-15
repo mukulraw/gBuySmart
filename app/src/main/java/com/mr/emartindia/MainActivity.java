@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     List<Best> list2;
     List<Cat> list3;
     List<Banners> list4;
-    TextView count, rewards, login, terms, about, address, logout, cart, orders;
+    TextView count, rewards, login, terms, about, address, logout, cart, orders , refer;
     ImageButton cart1;
     EditText search;
     OfferAdapter adapter;
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         banner5 = findViewById(R.id.banner5);
         banner6 = findViewById(R.id.banner6);
 
+        refer = findViewById(R.id.refer);
         orders = findViewById(R.id.orders);
         indicator = findViewById(R.id.indicator);
         banner = findViewById(R.id.banner);
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (uid.length() > 0) {
             login.setText(SharePreferenceUtils.getInstance().getString("phone"));
-            rewards.setText("eCash - " + SharePreferenceUtils.getInstance().getString("rewards"));
+            rewards.setText("eCashback - " + SharePreferenceUtils.getInstance().getString("rewards"));
             //rewards.setVisibility(View.VISIBLE);
             getRew();
         } else {
@@ -239,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
                 intent.putExtra("title", "Terms & Conditions");
-                intent.putExtra("url", "https://mrtecks.com/janathabazaar/api/terms.php");
+                intent.putExtra("url", "https://technuoma.com/emartindia/terms.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -262,12 +263,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
                 intent.putExtra("title", "About Us");
-                intent.putExtra("url", "https://mrtecks.com/janathabazaar/api/about.php");
+                intent.putExtra("url", "https://technuoma.com/emartindia/about.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
             }
         });
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -1025,7 +1027,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                rewards.setText("eCash - " + response.body());
+                rewards.setText("eCashback - " + response.body());
 
                 progress.setVisibility(View.GONE);
 

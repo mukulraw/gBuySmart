@@ -723,7 +723,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
             Log.d("today" , currentTime);
 
-            String time1 = "09:30";
+            String time1 = "19:30";
             String time2 = "11:30";
             String time3 = "14:00";
             String time4 = "16:00";
@@ -784,10 +784,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
             if (date1.compareTo(cd) > 0)
             {
-                ts.add("9:30 - 11:30");
+                ts.add("6 AM - 10 PM");
             }
 
-            if (date2.compareTo(cd) > 0)
+           /* if (date2.compareTo(cd) > 0)
             {
                 ts.add("11:30 - 1:30");
             }
@@ -807,7 +807,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
             if (date6.compareTo(cd) > 0)
             {
                 ts.add("7:30 - 9:00");
-            }
+            }*/
             else
             {
                 ts.add("No time slot available for today");
@@ -827,12 +827,12 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
             tslot = "";
 
 
-            ts.add("9:30 - 11:30");
-            ts.add("11:30 - 1:30");
-            ts.add("2:00 - 4:00");
-            ts.add("4:00 - 6:00");
-            ts.add("6:00 - 7:30");
-            ts.add("7:30 - 9:00");
+            ts.add("6 AM - 10 PM");
+            //ts.add("11:30 - 1:30");
+            //ts.add("2:00 - 4:00");
+            //ts.add("4:00 - 6:00");
+            //ts.add("6:00 - 7:30");
+            //ts.add("7:30 - 9:00");
 
 
 

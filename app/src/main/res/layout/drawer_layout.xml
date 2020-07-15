@@ -32,7 +32,7 @@
         android:padding="10dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:text="eCash - "
+        android:text="eCashback - "
         android:gravity="end"
         android:textColor="#ffffff"
         android:textStyle="bold"
@@ -66,6 +66,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="eCash - 0"
+            android:drawableStart="@drawable/ic_wallet"
+            android:drawablePadding="22dp"
+            android:id="@+id/wallet"
+            />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -171,6 +182,18 @@
             android:drawableStart="@drawable/ic_help_black_24dp"
             android:id="@+id/about"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Refer and Earn (upto 5 persons)"
+            android:visibility="visible"
+            android:drawablePadding="22dp"
+            android:drawableStart="@drawable/ic_rupee"
+            android:id="@+id/refer"
+            />
+
 
         <TextView
             android:layout_width="match_parent"

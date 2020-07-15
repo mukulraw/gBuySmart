@@ -140,6 +140,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:id="@+id/brand"
                             />
 
@@ -148,6 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="16dp"
+                            android:visibility="gone"
                             android:layout_marginEnd="8dp"
                             android:textColor="#000000"
                             android:text="Stock" />
@@ -158,6 +160,8 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:id="@+id/unit"
+                            android:visibility="gone"
+                            android:layout_marginBottom="8dp"
                             android:layout_marginEnd="8dp"
                             />
 
@@ -167,6 +171,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="8dp"
+                            android:visibility="gone"
                             android:textColor="#000000"
                             android:text="Seller" />
 
@@ -175,6 +180,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
+                            android:visibility="gone"
                             android:layout_marginEnd="8dp"
                             android:id="@+id/seller"
                             android:layout_marginBottom="8dp"
