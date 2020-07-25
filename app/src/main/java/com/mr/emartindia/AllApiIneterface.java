@@ -42,7 +42,8 @@ public interface AllApiIneterface {
     @Multipart
     @POST("emartindia/api/getProducts.php")
     Call<productsBean> getProducts(
-            @Part("subcat2") String cat
+            @Part("subcat2") String cat,
+            @Part("location_id") String location_id
     );
 
     @Multipart
@@ -54,7 +55,8 @@ public interface AllApiIneterface {
     @Multipart
     @POST("emartindia/api/search.php")
     Call<searchBean> search(
-            @Part("query") String query
+            @Part("query") String query,
+            @Part("location_id") String location_id
     );
 
     @Multipart

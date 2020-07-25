@@ -295,8 +295,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
-                intent.putExtra("title", "About Us");
-                intent.putExtra("url", "https://technuoma.com/emartindia/about.php");
+                intent.putExtra("title", "FAQs");
+                intent.putExtra("url", "https://technuoma.com/emartindia/faq.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -308,13 +308,20 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                ShareCompat.IntentBuilder.from(MainActivity.this)
+                        .setType("text/plain")
+                        .setChooserTitle("Chooser title")
+                        .setText("http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId"))
+                        .startChooser();
+
+                /*Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(
                         "http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId")));
                 intent.setPackage("com.android.vending");
                 startActivity(intent);
 
                 Log.d("adasd", "http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId"));
+                */
                 drawer.closeDrawer(GravityCompat.START);
                 /*ShareCompat.IntentBuilder.from(MainActivity.this)
                         .setType("text/plain")

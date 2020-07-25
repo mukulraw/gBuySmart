@@ -102,7 +102,7 @@ public class productList extends Fragment {
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<productsBean> call = cr.getProducts(id);
+        Call<productsBean> call = cr.getProducts(id , SharePreferenceUtils.getInstance().getString("location"));
         call.enqueue(new Callback<productsBean>() {
             @Override
             public void onResponse(Call<productsBean> call, Response<productsBean> response) {

@@ -168,7 +168,7 @@
             android:text="Terms &amp; Conditions"
             android:drawablePadding="22dp"
             android:drawableStart="@drawable/ic_assignment_black_24dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/terms"
             />
 
@@ -177,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="About Us"
+            android:text="FAQs"
             android:visibility="visible"
             android:drawablePadding="22dp"
             android:drawableStart="@drawable/ic_help_black_24dp"

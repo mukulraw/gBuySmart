@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:maxLines="1"
-        android:background="@drawable/white_back_round"
+        android:background="@drawable/white_back_round2"
         android:inputType="textPersonName"
         android:hint="tap to search"
         android:padding="10dp"

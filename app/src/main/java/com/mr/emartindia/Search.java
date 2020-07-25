@@ -109,7 +109,7 @@ public class Search extends AppCompatActivity {
                             .build();
                     AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                    Call<searchBean> call = cr.search(s.toString());
+                    Call<searchBean> call = cr.search(s.toString() , SharePreferenceUtils.getInstance().getString("location"));
                     call.enqueue(new Callback<searchBean>() {
                         @Override
                         public void onResponse(Call<searchBean> call, Response<searchBean> response) {
