@@ -151,6 +151,8 @@ public interface AllApiIneterface {
     @POST("emartindia/api/buyVouchers.php")
     Call<checkoutBean> buyVouchers(
             @Part("user_id") String user_id,
+            @Part("lat") String lat,
+            @Part("lng") String lng,
             @Part("amount") String amount,
             @Part("txn") String txn,
             @Part("name") String name,

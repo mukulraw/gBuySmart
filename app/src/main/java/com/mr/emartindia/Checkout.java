@@ -475,6 +475,8 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
                                                     Call<checkoutBean> call = cr.buyVouchers(
                                                             SharePreferenceUtils.getInstance().getString("userId"),
+                                                            SharePreferenceUtils.getInstance().getString("lat"),
+                                                            SharePreferenceUtils.getInstance().getString("lng"),
                                                             gtotal,
                                                             oid,
                                                             n,
@@ -633,6 +635,8 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
             Call<checkoutBean> call = cr.buyVouchers(
                     SharePreferenceUtils.getInstance().getString("userId"),
+                    SharePreferenceUtils.getInstance().getString("lat"),
+                    SharePreferenceUtils.getInstance().getString("lng"),
                     gtotal,
                     oid,
                     n,
