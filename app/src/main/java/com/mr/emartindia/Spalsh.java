@@ -53,7 +53,6 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
         }
 
 
-
     }
 
     public static boolean hasPermissions(Context context, String... permissions) {
@@ -85,10 +84,7 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
             } else {
                 if (
                         ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
+                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 ) {
 
                     Log.d("permmm", "3");
@@ -110,11 +106,9 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
     }
 
 
+    void startApp() {
 
-
-    void startApp(){
-
-        FirebaseMessaging.getInstance().subscribeToTopic("emart").addOnCompleteListener(task -> Log.d("task" , task.toString()));
+        FirebaseMessaging.getInstance().subscribeToTopic("emart").addOnCompleteListener(task -> Log.d("task", task.toString()));
 
         t = new Timer();
 
@@ -124,23 +118,19 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
             @Override
             public void run() {
 
-                if (id.length() > 0)
-                {
-                    Intent intent = new Intent(Spalsh.this , MainActivity.class);
+                if (id.length() > 0) {
+                    Intent intent = new Intent(Spalsh.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(Spalsh.this, Login.class);
                     startActivity(intent);
                     finish();
                 }
-                else
-                {
-                    Intent intent = new Intent(Spalsh.this , Login.class);
-                    startActivity(intent);
-                    finish();
-                }
-
 
 
             }
-        } , 1200);
+        }, 1200);
 
     }
 
@@ -152,7 +142,7 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
                     Log.v(TAG, "InstallReferrer conneceted");
                     ReferrerDetails response = mReferrerClient.getInstallReferrer();
 
-                    SharePreferenceUtils.getInstance().saveString("referrer" , response.getInstallReferrer());
+                    SharePreferenceUtils.getInstance().saveString("referrer", response.getInstallReferrer());
 
                     mReferrerClient.endConnection();
                 } catch (RemoteException e) {
