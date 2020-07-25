@@ -19,6 +19,9 @@ public class Banners {
     @SerializedName("cid")
     @Expose
     private String cid;
+    @SerializedName("catimage")
+    @Expose
+    private String catimage;
 
     public String getId() {
         return id;
@@ -58,5 +61,13 @@ public class Banners {
 
     public String getCname() {
         return cname;
+    }
+
+    public String getCatimage() {
+        return catimage;
+    }
+
+    public void setCatimage(String catimage) {
+        this.catimage = catimage;
     }
 }

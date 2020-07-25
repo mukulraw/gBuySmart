@@ -544,6 +544,23 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         String url = response.body().getObanner().get(0).getImage();
                         loader.displayImage(url, banner1, options);
 
+                        String cid = response.body().getObanner().get(0).getCid();
+                        String tit = response.body().getObanner().get(0).getCname();
+                        String image = response.body().getObanner().get(0).getCatimage();
+
+                        banner1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -553,6 +570,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         ImageLoader loader = ImageLoader.getInstance();
                         String url = response.body().getObanner().get(1).getImage();
                         loader.displayImage(url, banner2, options);
+
+                        String cid = response.body().getObanner().get(1).getCid();
+                        String tit = response.body().getObanner().get(1).getCname();
+                        String image = response.body().getObanner().get(1).getCatimage();
+
+                        banner2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -564,6 +599,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         String url = response.body().getObanner().get(2).getImage();
                         loader.displayImage(url, banner3, options);
 
+                        String cid = response.body().getObanner().get(2).getCid();
+                        String tit = response.body().getObanner().get(2).getCname();
+                        String image = response.body().getObanner().get(2).getCatimage();
+
+                        banner3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -573,6 +626,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         ImageLoader loader = ImageLoader.getInstance();
                         String url = response.body().getObanner().get(3).getImage();
                         loader.displayImage(url, banner4, options);
+
+                        String cid = response.body().getObanner().get(3).getCid();
+                        String tit = response.body().getObanner().get(3).getCname();
+                        String image = response.body().getObanner().get(3).getCatimage();
+
+                        banner4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -584,6 +655,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         String url = response.body().getObanner().get(4).getImage();
                         loader.displayImage(url, banner5, options);
 
+                        String cid = response.body().getObanner().get(4).getCid();
+                        String tit = response.body().getObanner().get(4).getCname();
+                        String image = response.body().getObanner().get(4).getCatimage();
+
+                        banner5.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -593,6 +682,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         ImageLoader loader = ImageLoader.getInstance();
                         String url = response.body().getObanner().get(5).getImage();
                         loader.displayImage(url, banner6, options);
+
+                        String cid = response.body().getObanner().get(5).getCid();
+                        String tit = response.body().getObanner().get(5).getCname();
+                        String image = response.body().getObanner().get(5).getCatimage();
+
+                        banner6.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cid != null) {
+                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
+                                    intent.putExtra("id", cid);
+                                    intent.putExtra("title", tit);
+                                    intent.putExtra("image", image);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -641,7 +748,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         @Override
         public Fragment getItem(int position) {
             page frag = new page();
-            frag.setData(blist.get(position).getImage(), blist.get(position).getCname(), blist.get(position).getCid());
+            frag.setData(blist.get(position).getImage(), blist.get(position).getCname(), blist.get(position).getCid() , blist.get(position).getCatimage());
             return frag;
         }
 
@@ -654,14 +761,15 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
     public static class page extends Fragment {
 
-        String url, tit, cid = "";
+        String url, tit, cid = "" , image2;
 
         ImageView image;
 
-        void setData(String url, String tit, String cid) {
+        void setData(String url, String tit, String cid, String image2) {
             this.url = url;
             this.tit = tit;
             this.cid = cid;
+            this.image2 = image2;
         }
 
         @Nullable
@@ -684,6 +792,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         Intent intent = new Intent(getContext(), SubCat.class);
                         intent.putExtra("id", cid);
                         intent.putExtra("title", tit);
+                        intent.putExtra("image", image2);
                         startActivity(intent);
                     }
 
@@ -727,6 +836,22 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
             ImageLoader loader = ImageLoader.getInstance();
             loader.displayImage(item.getImage(), holder.image, options);
+
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (item.getCid() != null) {
+                        Intent intent = new Intent(context, SubCat.class);
+                        intent.putExtra("id", item.getCid());
+                        intent.putExtra("title", item.getCname());
+                        intent.putExtra("image", item.getCatimage());
+                        startActivity(intent);
+                    }
+
+
+                }
+            });
 
 
         }
