@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="West Delhi"
+            android:visibility="gone"
             android:drawableStart="@drawable/ic_pin"
             android:drawablePadding="22dp"
             android:id="@+id/home"

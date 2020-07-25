@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
     List<Best> list2;
     List<Cat> list3;
     List<Banners> list4;
-    TextView count, rewards, login, terms, about, address, logout, cart, orders, refer;
+    TextView count, rewards, login, terms, about, address, logout, cart, orders, refer , location;
     ImageButton cart1;
     EditText search;
     OfferAdapter adapter;
@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         banner6 = findViewById(R.id.banner6);
 
         refer = findViewById(R.id.refer);
+        location = findViewById(R.id.location);
         orders = findViewById(R.id.orders);
         indicator = findViewById(R.id.indicator);
         banner = findViewById(R.id.banner);
@@ -514,7 +515,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<homeBean> call = cr.getHome();
+        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat") , SharePreferenceUtils.getInstance().getString("lng"));
         call.enqueue(new Callback<homeBean>() {
             @Override
             public void onResponse(Call<homeBean> call, Response<homeBean> response) {
@@ -607,6 +608,9 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         ll.remove(0);
                         adapter.setData(ll);
                     }
+
+                    SharePreferenceUtils.getInstance().saveString("location" , response.body().getLocation());
+                    location.setText(response.body().getCity());
 
                 }
 
@@ -1185,6 +1189,9 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         //TODO: UI updates.
                         lat = String.valueOf(location.getLatitude());
                         lng = String.valueOf(location.getLongitude());
+
+                        SharePreferenceUtils.getInstance().saveString("lat" , lat);
+                        SharePreferenceUtils.getInstance().saveString("lng" , lng);
 
                         Log.d("lat123", lat);
 

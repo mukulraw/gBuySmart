@@ -134,7 +134,6 @@
                                 android:paddingTop="8dp"
                                 android:paddingEnd="22dp"
                                 android:paddingBottom="8dp"
-                                android:text="West Delhi"
                                 android:textColor="#FF6000">
 
                             </TextView>
@@ -252,11 +251,11 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
+                            android:id="@+id/banner1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:id="@+id/banner1"/>
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -269,15 +268,13 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
+                            android:id="@+id/banner2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:id="@+id/banner2"/>
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
-
-
 
 
                     <androidx.cardview.widget.CardView
@@ -375,7 +372,7 @@
                                         android:layout_height="13dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginTop="8dp"
-                                        android:src="@drawable/rupee2"/>
+                                        android:src="@drawable/rupee2" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -418,7 +415,7 @@
                                         android:layout_height="13dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginTop="8dp"
-                                        android:src="@drawable/rupee"/>
+                                        android:src="@drawable/rupee" />
 
                                     <TextView
                                         android:id="@+id/avl_limit"
@@ -484,11 +481,11 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
+                            android:id="@+id/banner3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:id="@+id/banner3"/>
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -520,14 +517,13 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
+                            android:id="@+id/banner4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:id="@+id/banner4"/>
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <TextView
@@ -556,12 +552,12 @@
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="15dp">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:id="@+id/banner5"/>
+                        <ImageView
+                            android:id="@+id/banner5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -593,11 +589,11 @@
                         app:cardCornerRadius="15dp">
 
                         <ImageView
+                            android:id="@+id/banner6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:id="@+id/banner6"/>
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 

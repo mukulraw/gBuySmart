@@ -20,9 +20,12 @@ import retrofit2.http.Part;
 
 public interface AllApiIneterface {
 
-
-    @GET("emartindia/api/getHome.php")
-    Call<homeBean> getHome();
+    @Multipart
+    @POST("emartindia/api/getHome2.php")
+    Call<homeBean> getHome(
+            @Part("lat") String lat,
+            @Part("lng") String lng
+    );
 
     @Multipart
     @POST("emartindia/api/getSubCat1.php")

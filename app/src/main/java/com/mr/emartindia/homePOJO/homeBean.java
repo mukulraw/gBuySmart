@@ -30,6 +30,12 @@ public class homeBean {
     @SerializedName("cat")
     @Expose
     private List<Cat> cat = null;
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("city")
+    @Expose
+    private String city;
 
     public String getStatus() {
         return status;
@@ -93,5 +99,21 @@ public class homeBean {
 
     public void setCat(List<Cat> cat) {
         this.cat = cat;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

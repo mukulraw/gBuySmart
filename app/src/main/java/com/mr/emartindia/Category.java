@@ -99,7 +99,7 @@ public class Category extends AppCompatActivity {
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<homeBean> call = cr.getHome();
+        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat") , SharePreferenceUtils.getInstance().getString("lng"));
         call.enqueue(new Callback<homeBean>() {
             @Override
             public void onResponse(Call<homeBean> call, Response<homeBean> response) {
