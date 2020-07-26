@@ -20,46 +20,46 @@ import retrofit2.http.Part;
 public interface AllApiIneterface {
 
     @Multipart
-    @POST("easyhomez/api/getHome2.php")
+    @POST("gbuysmart/api/getHome2.php")
     Call<homeBean> getHome(
             @Part("lat") String lat,
             @Part("lng") String lng
     );
 
     @Multipart
-    @POST("easyhomez/api/getSubCat1.php")
+    @POST("gbuysmart/api/getSubCat1.php")
     Call<subCat1Bean> getSubCat1(
             @Part("cat") String cat
     );
 
     @Multipart
-    @POST("easyhomez/api/getSubCat2.php")
+    @POST("gbuysmart/api/getSubCat2.php")
     Call<subCat1Bean> getSubCat2(
             @Part("subcat1") String cat
     );
 
     @Multipart
-    @POST("easyhomez/api/getProducts.php")
+    @POST("gbuysmart/api/getProducts.php")
     Call<productsBean> getProducts(
             @Part("subcat2") String cat,
             @Part("location_id") String location_id
     );
 
     @Multipart
-    @POST("easyhomez/api/getProductById.php")
+    @POST("gbuysmart/api/getProductById.php")
     Call<singleProductBean> getProductById(
             @Part("id") String cat
     );
 
     @Multipart
-    @POST("easyhomez/api/search.php")
+    @POST("gbuysmart/api/search.php")
     Call<searchBean> search(
             @Part("query") String query,
             @Part("location_id") String location_id
     );
 
     @Multipart
-    @POST("easyhomez/api/login.php")
+    @POST("gbuysmart/api/login.php")
     Call<loginBean> login(
             @Part("phone") String phone,
             @Part("token") String token,
@@ -67,14 +67,14 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("easyhomez/api/verify.php")
+    @POST("gbuysmart/api/verify.php")
     Call<loginBean> verify(
             @Part("phone") String phone,
             @Part("otp") String otp
     );
 
     @Multipart
-    @POST("easyhomez/api/addCart.php")
+    @POST("gbuysmart/api/addCart.php")
     Call<singleProductBean> addCart(
             @Part("user_id") String user_id,
             @Part("product_id") String product_id,
@@ -84,7 +84,7 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("easyhomez/api/updateCart.php")
+    @POST("gbuysmart/api/updateCart.php")
     Call<singleProductBean> updateCart(
             @Part("id") String id,
             @Part("quantity") String quantity,
@@ -92,62 +92,62 @@ public interface AllApiIneterface {
     );
 
     @Multipart
-    @POST("easyhomez/api/deleteCart.php")
+    @POST("gbuysmart/api/deleteCart.php")
     Call<singleProductBean> deleteCart(
             @Part("id") String id
     );
 
     @Multipart
-    @POST("easyhomez/api/getRew.php")
+    @POST("gbuysmart/api/getRew.php")
     Call<String> getRew(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/clearCart.php")
+    @POST("gbuysmart/api/clearCart.php")
     Call<singleProductBean> clearCart(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/getOrderDetails.php")
+    @POST("gbuysmart/api/getOrderDetails.php")
     Call<orderDetailsBean> getOrderDetails(
             @Part("order_id") String order_id
     );
 
     @Multipart
-    @POST("easyhomez/api/getCart.php")
+    @POST("gbuysmart/api/getCart.php")
     Call<cartBean> getCart(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/getOrders.php")
+    @POST("gbuysmart/api/getOrders.php")
     Call<ordersBean> getOrders(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/getAddress.php")
+    @POST("gbuysmart/api/getAddress.php")
     Call<addressBean> getAddress(
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/deleteAddress.php")
+    @POST("gbuysmart/api/deleteAddress.php")
     Call<addressBean> deleteAddress(
             @Part("id") String id
     );
 
     @Multipart
-    @POST("easyhomez/api/checkPromo.php")
+    @POST("gbuysmart/api/checkPromo.php")
     Call<checkPromoBean> checkPromo(
             @Part("promo") String promo,
             @Part("user_id") String user_id
     );
 
     @Multipart
-    @POST("easyhomez/api/buyVouchers.php")
+    @POST("gbuysmart/api/buyVouchers.php")
     Call<checkoutBean> buyVouchers(
             @Part("user_id") String user_id,
             @Part("lat") String lat,
