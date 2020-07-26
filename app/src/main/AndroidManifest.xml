@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.technuoma.easyHomezIndia">
+    package="com.technuoma.gbuysmart">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.technuoma.easyHomezIndia.Bean"
+        android:name="com.technuoma.gbuysmart.Bean"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,46 +17,46 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="com.technuoma.easyHomezIndia.Address" />
-        <activity android:name="com.technuoma.easyHomezIndia.Web" />
+        <activity android:name="com.technuoma.gbuysmart.Address" />
+        <activity android:name="com.technuoma.gbuysmart.Web" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.OrderDetails"
+            android:name="com.technuoma.gbuysmart.OrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.OTP"
+            android:name="com.technuoma.gbuysmart.OTP"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Location"
+            android:name="com.technuoma.gbuysmart.Location"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Search"
+            android:name="com.technuoma.gbuysmart.Search"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Orders"
+            android:name="com.technuoma.gbuysmart.Orders"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Checkout"
+            android:name="com.technuoma.gbuysmart.Checkout"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Cart"
+            android:name="com.technuoma.gbuysmart.Cart"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.SingleProduct"
+            android:name="com.technuoma.gbuysmart.SingleProduct"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Products"
+            android:name="com.technuoma.gbuysmart.Products"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.SubCat"
+            android:name="com.technuoma.gbuysmart.SubCat"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Category"
+            android:name="com.technuoma.gbuysmart.Category"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Login"
+            android:name="com.technuoma.gbuysmart.Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.easyHomezIndia.Spalsh"
+            android:name="com.technuoma.gbuysmart.Spalsh"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,11 +64,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.technuoma.easyHomezIndia.MainActivity" />
-        <activity android:name="com.technuoma.easyHomezIndia.WebViewActivity" />
+        <activity android:name="com.technuoma.gbuysmart.MainActivity" />
+        <activity android:name="com.technuoma.gbuysmart.WebViewActivity" />
 
         <service
-            android:name="com.technuoma.easyHomezIndia.MyFirebaseMessagingService"
+            android:name="com.technuoma.gbuysmart.MyFirebaseMessagingService"
             android:permission="">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
