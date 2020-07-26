@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.technuoma.gbuysmart.homePOJO.Cat;
@@ -69,7 +70,7 @@ public class Category extends AppCompatActivity {
 
 
         adapter = new CategoryAdapter(this, list);
-        GridLayoutManager manager = new GridLayoutManager(this, 1);
+        GridLayoutManager manager = new GridLayoutManager(this, 3);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
@@ -156,7 +157,6 @@ public class Category extends AppCompatActivity {
 
             //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
-            holder.desc.setText(item.getDescription());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,8 +181,8 @@ public class Category extends AppCompatActivity {
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            ImageView image;
-            TextView tag, title, desc;
+            RoundedImageView image;
+            TextView tag, title;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -190,7 +190,6 @@ public class Category extends AppCompatActivity {
                 image = itemView.findViewById(R.id.imageView5);
                 //tag = itemView.findViewById(R.id.textView17);
                 title = itemView.findViewById(R.id.textView18);
-                desc = itemView.findViewById(R.id.textView5);
 
 
             }

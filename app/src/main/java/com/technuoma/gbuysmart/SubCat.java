@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.technuoma.gbuysmart.subCat1POJO.Datum;
@@ -200,15 +201,14 @@ public class SubCat extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder
         {
 
-            ImageView image;
-            TextView title;
-
+            RoundedImageView image;
+            TextView tag, title;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                image = itemView.findViewById(R.id.imageView4);
-
-                title = itemView.findViewById(R.id.textView11);
+                image = itemView.findViewById(R.id.imageView5);
+                //tag = itemView.findViewById(R.id.textView17);
+                title = itemView.findViewById(R.id.textView18);
 
 
 

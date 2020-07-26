@@ -51,6 +51,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.technuoma.gbuysmart.cartPOJO.cartBean;
 import com.technuoma.gbuysmart.homePOJO.Banners;
 import com.technuoma.gbuysmart.homePOJO.Best;
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         LinearLayoutManager manager3 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager4 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager6 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        GridLayoutManager manager5 = new GridLayoutManager(this, 1);
+        GridLayoutManager manager5 = new GridLayoutManager(this, 3);
         GridLayoutManager manager7 = new GridLayoutManager(this, 1);
 
         recent.setAdapter(adapter2);
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
                 intent.putExtra("title", "Terms & Conditions");
-                intent.putExtra("url", "https://technuoma.com/easyhomez/terms.php");
+                intent.putExtra("url", "https://technuoma.com/gbuysmart/terms.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -278,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
                 intent.putExtra("title", "About Us");
-                intent.putExtra("url", "https://technuoma.com/easyhomez/about.php");
+                intent.putExtra("url", "https://technuoma.com/gbuysmart/about.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -439,7 +440,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
             //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
-            holder.desc.setText(item.getDescription());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -463,8 +463,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            ImageView image;
-            TextView tag, title, desc;
+            RoundedImageView image;
+            TextView tag, title;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -472,7 +472,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                 image = itemView.findViewById(R.id.imageView5);
                 //tag = itemView.findViewById(R.id.textView17);
                 title = itemView.findViewById(R.id.textView18);
-                desc = itemView.findViewById(R.id.textView5);
 
 
             }
