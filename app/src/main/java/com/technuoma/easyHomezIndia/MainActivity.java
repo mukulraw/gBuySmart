@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -89,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
     DrawerLayout drawer;
     AutoViewPager pager;
     ProgressBar progress;
-    CircleIndicator indicator;
-    RecyclerView categories, recent, loved, safe, essentails, top, banner;
+    RecyclerView categories, recent, loved, banner;
     BestAdapter adapter2, adapter3;
     BestAdapter adapter4;
     BestAdapter adapter5;
@@ -101,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
     List<Best> list2;
     List<Cat> list3;
     List<Banners> list4;
-    TextView count, rewards, login, terms, about, address, logout, cart, orders, refer , location;
+    TextView count, rewards, login, terms, about, address, logout, cart, orders, refer, location;
     ImageButton cart1;
-    EditText search;
+    Button search , cate;
     OfferAdapter adapter;
 
-    ImageView banner1, banner2, banner3, banner4, banner5, banner6;
+    ImageView banner1, banner2, banner3;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -129,16 +129,14 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         banner1 = findViewById(R.id.banner1);
         banner2 = findViewById(R.id.banner2);
         banner3 = findViewById(R.id.banner3);
-        banner4 = findViewById(R.id.banner4);
-        banner5 = findViewById(R.id.banner5);
-        banner6 = findViewById(R.id.banner6);
 
         refer = findViewById(R.id.refer);
+        cate = findViewById(R.id.cate);
         location = findViewById(R.id.location);
         orders = findViewById(R.id.orders);
-        indicator = findViewById(R.id.indicator);
         banner = findViewById(R.id.banner);
         pager = findViewById(R.id.viewPager);
+        pager.setPageMargin(20);
         progress = findViewById(R.id.progress);
         // indicator = findViewById(R.id.indicator);
         categories = findViewById(R.id.categories);
@@ -146,9 +144,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         recent = findViewById(R.id.recent);
         count = findViewById(R.id.count);
         rewards = findViewById(R.id.rewards);
-        safe = findViewById(R.id.safe);
-        essentails = findViewById(R.id.essentials);
-        top = findViewById(R.id.top);
         cart1 = findViewById(R.id.imageButton3);
         login = findViewById(R.id.textView3);
         terms = findViewById(R.id.terms);
@@ -189,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         LinearLayoutManager manager3 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager4 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         LinearLayoutManager manager6 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        GridLayoutManager manager5 = new GridLayoutManager(this, 3);
+        GridLayoutManager manager5 = new GridLayoutManager(this, 1);
         GridLayoutManager manager7 = new GridLayoutManager(this, 1);
 
         recent.setAdapter(adapter2);
@@ -198,25 +193,12 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         loved.setAdapter(adapter3);
         loved.setLayoutManager(manager2);
 
-        essentails.setAdapter(adapter4);
-        essentails.setLayoutManager(manager3);
 
-        manager5.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int i) {
-                return Integer.parseInt(adapter6.getSpace(i));
-            }
-        });
 
 
         categories.setAdapter(adapter6);
         categories.setLayoutManager(manager5);
 
-        safe.setAdapter(adapter4);
-        safe.setLayoutManager(manager4);
-
-        top.setAdapter(adapter7);
-        top.setLayoutManager(manager6);
 
         banner.setAdapter(adapter);
         banner.setLayoutManager(manager7);
@@ -225,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         if (uid.length() > 0) {
             login.setText(SharePreferenceUtils.getInstance().getString("phone"));
-            rewards.setText("eCashback - " + SharePreferenceUtils.getInstance().getString("rewards"));
+            rewards.setText("Wallet - " + SharePreferenceUtils.getInstance().getString("rewards"));
             //rewards.setVisibility(View.VISIBLE);
             getRew();
         } else {
@@ -285,6 +267,16 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             }
         });
 
+        cate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, Category.class);
+                startActivity(intent);
+
+            }
+        });
+
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -299,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         });
 
 
-        refer.setOnClickListener(new View.OnClickListener() {
+        /*refer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -309,23 +301,23 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         .setText("http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId"))
                         .startChooser();
 
-                /*Intent intent = new Intent(Intent.ACTION_VIEW);
+                *//*Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(
                         "http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId")));
                 intent.setPackage("com.android.vending");
                 startActivity(intent);
 
                 Log.d("adasd", "http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId"));
-                */
+                *//*
                 drawer.closeDrawer(GravityCompat.START);
-                /*ShareCompat.IntentBuilder.from(MainActivity.this)
+                *//*ShareCompat.IntentBuilder.from(MainActivity.this)
                         .setType("text/plain")
                         .setChooserTitle("Chooser title")
                         .setText("http://play.google.com/store/apps/details?id=" + getPackageName() + "&referrer=" + SharePreferenceUtils.getInstance().getString("userId"))
-                        .startChooser();*/
+                        .startChooser();*//*
 
             }
-        });
+        });*/
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -452,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
             //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
-            //holder.desc.setText(item.getDescription());
+            //holder.desc.setText(item.getDesc());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -485,7 +477,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                 image = itemView.findViewById(R.id.imageView5);
                 //tag = itemView.findViewById(R.id.textView17);
                 title = itemView.findViewById(R.id.textView18);
-                //desc = itemView.findViewById(R.id.textView19);
+                desc = itemView.findViewById(R.id.textView5);
 
 
             }
@@ -517,7 +509,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat") , SharePreferenceUtils.getInstance().getString("lng"));
+        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat"), SharePreferenceUtils.getInstance().getString("lng"));
         call.enqueue(new Callback<homeBean>() {
             @Override
             public void onResponse(Call<homeBean> call, Response<homeBean> response) {
@@ -528,7 +520,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                     BannerAdapter adapter1 = new BannerAdapter(getSupportFragmentManager(), response.body().getPbanner());
                     pager.setAdapter(adapter1);
-                    indicator.setViewPager(pager);
 
                     adapter2.setData(response.body().getBest());
                     adapter3.setData(response.body().getToday());
@@ -623,102 +614,16 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         e.printStackTrace();
                     }
 
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(3).getImage();
-                        loader.displayImage(url, banner4, options);
 
-                        String cid = response.body().getObanner().get(3).getCid();
-                        String tit = response.body().getObanner().get(3).getCname();
-                        String image = response.body().getObanner().get(3).getCatimage();
-
-                        banner4.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(4).getImage();
-                        loader.displayImage(url, banner5, options);
-
-                        String cid = response.body().getObanner().get(4).getCid();
-                        String tit = response.body().getObanner().get(4).getCname();
-                        String image = response.body().getObanner().get(4).getCatimage();
-
-                        banner5.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(5).getImage();
-                        loader.displayImage(url, banner6, options);
-
-                        String cid = response.body().getObanner().get(5).getCid();
-                        String tit = response.body().getObanner().get(5).getCname();
-                        String image = response.body().getObanner().get(5).getCatimage();
-
-                        banner6.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    if (response.body().getObanner().size() > 6) {
+                    if (response.body().getObanner().size() > 3) {
                         List<Banners> ll = response.body().getObanner();
-                        ll.remove(0);
-                        ll.remove(0);
-                        ll.remove(0);
                         ll.remove(0);
                         ll.remove(0);
                         ll.remove(0);
                         adapter.setData(ll);
                     }
 
-                    SharePreferenceUtils.getInstance().saveString("location" , response.body().getLocation());
+                    SharePreferenceUtils.getInstance().saveString("location", response.body().getLocation());
                     location.setText(response.body().getCity());
 
                 }
@@ -750,7 +655,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         @Override
         public Fragment getItem(int position) {
             page frag = new page();
-            frag.setData(blist.get(position).getImage(), blist.get(position).getCname(), blist.get(position).getCid() , blist.get(position).getCatimage());
+            frag.setData(blist.get(position).getImage(), blist.get(position).getCname(), blist.get(position).getCid(), blist.get(position).getCatimage());
             return frag;
         }
 
@@ -763,7 +668,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
     public static class page extends Fragment {
 
-        String url, tit, cid = "" , image2;
+        String url, tit, cid = "", image2;
 
         ImageView image;
 
@@ -960,6 +865,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+            holder.setIsRecyclable(false);
+
             final Best item = list.get(position);
 
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
@@ -977,6 +884,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             }
 
             holder.stock.setText(item.getStock());
+            holder.size.setText(item.getSize());
 
             if (dis > 0) {
 
@@ -989,12 +897,15 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                 holder.discount.setVisibility(View.VISIBLE);
                 holder.discount.setText(item.getDiscount() + "% OFF");
-                holder.price.setText(Html.fromHtml("<font color=\"#FF6000\"><b>\u20B9 " + String.valueOf(nv) + " </b></font><strike>\u20B9 " + item.getPrice() + "</strike>"));
+                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
+                holder.newamount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
+                holder.newamount.setVisibility(View.VISIBLE);
             } else {
 
                 nv1 = item.getPrice();
                 holder.discount.setVisibility(View.GONE);
-                holder.price.setText(Html.fromHtml("<font color=\"#FF6000\"><b>\u20B9 " + String.valueOf(item.getPrice()) + " </b></font>"));
+                holder.price.setText("\u20B9 " + item.getPrice());
+                holder.newamount.setVisibility(View.GONE);
             }
 
 
@@ -1115,7 +1026,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView image;
-            TextView price, title, discount, stock;
+            TextView price, title, discount, stock , newamount , size;
             Button add;
 
             public ViewHolder(@NonNull View itemView) {
@@ -1127,6 +1038,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                 discount = itemView.findViewById(R.id.textView10);
                 add = itemView.findViewById(R.id.button5);
                 stock = itemView.findViewById(R.id.textView63);
+                newamount = itemView.findViewById(R.id.textView6);
+                size = itemView.findViewById(R.id.textView7);
 
 
             }
@@ -1216,7 +1129,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                rewards.setText("eCashback - " + response.body());
+                rewards.setText("Wallet - " + response.body());
 
                 progress.setVisibility(View.GONE);
 
@@ -1317,8 +1230,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         lat = String.valueOf(location.getLatitude());
                         lng = String.valueOf(location.getLongitude());
 
-                        SharePreferenceUtils.getInstance().saveString("lat" , lat);
-                        SharePreferenceUtils.getInstance().saveString("lng" , lng);
+                        SharePreferenceUtils.getInstance().saveString("lat", lat);
+                        SharePreferenceUtils.getInstance().saveString("lng", lng);
 
                         Log.d("lat123", lat);
 

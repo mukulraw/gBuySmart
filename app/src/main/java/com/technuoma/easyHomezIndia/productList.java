@@ -57,7 +57,7 @@ public class productList extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.product_layout , container , false);
+        View view = inflater.inflate(R.layout.product_layout, container, false);
 
         list = new ArrayList<>();
 
@@ -66,13 +66,11 @@ public class productList extends Fragment {
         grid = view.findViewById(R.id.grid);
         progress = view.findViewById(R.id.progress);
 
-        adapter = new BestAdapter(getActivity() , list);
-        GridLayoutManager manager = new GridLayoutManager(getContext() , 1);
+        adapter = new BestAdapter(getActivity(), list);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
-
-
 
 
         return view;
@@ -102,14 +100,13 @@ public class productList extends Fragment {
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<productsBean> call = cr.getProducts(id , SharePreferenceUtils.getInstance().getString("location"));
+        Call<productsBean> call = cr.getProducts(id, SharePreferenceUtils.getInstance().getString("location"));
         call.enqueue(new Callback<productsBean>() {
             @Override
             public void onResponse(Call<productsBean> call, Response<productsBean> response) {
 
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
                     adapter.setData(response.body().getData());
                 }
 
@@ -125,20 +122,17 @@ public class productList extends Fragment {
         });
     }
 
-    class BestAdapter extends RecyclerView.Adapter<BestAdapter.ViewHolder>
-    {
+    class BestAdapter extends RecyclerView.Adapter<BestAdapter.ViewHolder> {
 
         Context context;
         List<Datum> list = new ArrayList<>();
 
-        public BestAdapter(Context context , List<Datum> list)
-        {
+        public BestAdapter(Context context, List<Datum> list) {
             this.context = context;
             this.list = list;
         }
 
-        public void setData(List<Datum> list)
-        {
+        public void setData(List<Datum> list) {
             this.list = list;
             notifyDataSetChanged();
         }
@@ -146,42 +140,40 @@ public class productList extends Fragment {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.best_list_model2 , parent , false);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.best_list_model2, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+            holder.setIsRecyclable(false);
+
             final Datum item = list.get(position);
 
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
             ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage() , holder.image , options);
+            loader.displayImage(item.getImage(), holder.image, options);
 
 
-            if (item.getStock().equals("In stock"))
-            {
+            if (item.getStock().equals("In stock")) {
                 holder.add.setEnabled(true);
-            }
-            else
-            {
+            } else {
                 holder.add.setEnabled(false);
             }
 
             holder.stock.setText(item.getStock());
-
+            holder.size.setText(item.getSize());
 
             float dis = Float.parseFloat(item.getDiscount());
             String nv1 = null;
 
 
-            if (dis > 0)
-            {
+            if (dis > 0) {
 
                 float pri = Float.parseFloat(item.getPrice());
-                float dv = (dis / 100 ) * pri;
+                float dv = (dis / 100) * pri;
 
                 float nv = pri - dv;
 
@@ -189,13 +181,15 @@ public class productList extends Fragment {
 
                 holder.discount.setVisibility(View.VISIBLE);
                 holder.discount.setText(item.getDiscount() + "% OFF");
-                holder.price.setText(Html.fromHtml("<font color=\"#000000\"><b>\u20B9 " + String.valueOf(nv) + " </b></font><strike>\u20B9 " + item.getPrice() + "</strike>"));
-            }
-            else
-            {
+                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
+                holder.newamount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
+                holder.newamount.setVisibility(View.VISIBLE);
+            } else {
+
                 nv1 = item.getPrice();
                 holder.discount.setVisibility(View.GONE);
-                holder.price.setText(Html.fromHtml("<font color=\"#000000\"><b>\u20B9 " + String.valueOf(item.getPrice()) + " </b></font>"));
+                holder.price.setText("\u20B9 " + item.getPrice());
+                holder.newamount.setVisibility(View.GONE);
             }
 
 
@@ -205,9 +199,9 @@ public class productList extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(context , SingleProduct.class);
-                    intent.putExtra("id" , item.getId());
-                    intent.putExtra("title" , item.getName());
+                    Intent intent = new Intent(context, SingleProduct.class);
+                    intent.putExtra("id", item.getId());
+                    intent.putExtra("title", item.getName());
                     context.startActivity(intent);
 
                 }
@@ -220,8 +214,7 @@ public class productList extends Fragment {
 
                     String uid = SharePreferenceUtils.getInstance().getString("userId");
 
-                    if (uid.length() > 0)
-                    {
+                    if (uid.length() > 0) {
 
                         final Dialog dialog = new Dialog(context);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -229,10 +222,9 @@ public class productList extends Fragment {
                         dialog.setContentView(R.layout.add_cart_dialog);
                         dialog.show();
 
-                        final StepperTouch stepperTouch  = dialog.findViewById(R.id.stepperTouch);
+                        final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
                         Button add = dialog.findViewById(R.id.button8);
                         final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
-
 
 
                         stepperTouch.setMinValue(1);
@@ -263,22 +255,21 @@ public class productList extends Fragment {
                                         .build();
                                 AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                                Log.d("userid" , SharePreferenceUtils.getInstance().getString("userid"));
-                                Log.d("pid" , item.getId());
-                                Log.d("quantity" , String.valueOf(stepperTouch.getCount()));
-                                Log.d("price" , finalNv);
+                                Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
+                                Log.d("pid", item.getId());
+                                Log.d("quantity", String.valueOf(stepperTouch.getCount()));
+                                Log.d("price", finalNv);
 
                                 int versionCode = BuildConfig.VERSION_CODE;
                                 String versionName = BuildConfig.VERSION_NAME;
 
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId") , item.getId() , String.valueOf(stepperTouch.getCount()), finalNv , versionName);
+                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), finalNv, versionName);
 
                                 call.enqueue(new Callback<singleProductBean>() {
                                     @Override
                                     public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
 
-                                        if (response.body().getStatus().equals("1"))
-                                        {
+                                        if (response.body().getStatus().equals("1")) {
                                             //loadCart();
                                             dialog.dismiss();
                                         }
@@ -299,11 +290,9 @@ public class productList extends Fragment {
                             }
                         });
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(context, "Please login to continue", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context , Login.class);
+                        Intent intent = new Intent(context, Login.class);
                         context.startActivity(intent);
 
                     }
@@ -318,12 +307,12 @@ public class productList extends Fragment {
             return list.size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder
-        {
+        class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView image;
-            TextView price , title , discount , stock;
+            TextView price, title, discount, stock , newamount , size;
             Button add;
+
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
@@ -332,7 +321,9 @@ public class productList extends Fragment {
                 title = itemView.findViewById(R.id.textView12);
                 discount = itemView.findViewById(R.id.textView10);
                 add = itemView.findViewById(R.id.button5);
-                stock = itemView.findViewById(R.id.textView64);
+                stock = itemView.findViewById(R.id.textView63);
+                newamount = itemView.findViewById(R.id.textView6);
+                size = itemView.findViewById(R.id.textView7);
 
             }
         }

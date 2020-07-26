@@ -56,7 +56,7 @@ public class Category extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitleTextColor(Color.BLACK);
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("Categories");
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class Category extends AppCompatActivity {
 
 
         adapter = new CategoryAdapter(this, list);
-        GridLayoutManager manager = new GridLayoutManager(this, 3);
+        GridLayoutManager manager = new GridLayoutManager(this, 1);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
@@ -150,12 +150,13 @@ public class Category extends AppCompatActivity {
 
             final Cat item = list.get(position);
 
-
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
             ImageLoader loader = ImageLoader.getInstance();
             loader.displayImage(item.getImage(), holder.image, options);
 
+            //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
+            //holder.desc.setText(item.getDesc());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -187,8 +188,9 @@ public class Category extends AppCompatActivity {
                 super(itemView);
 
                 image = itemView.findViewById(R.id.imageView5);
+                //tag = itemView.findViewById(R.id.textView17);
                 title = itemView.findViewById(R.id.textView18);
-
+                desc = itemView.findViewById(R.id.textView5);
 
 
             }
