@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.technuoma.emartindia">
+    package="com.technuoma.easyHomezIndia">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,55 +8,55 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.technuoma.emartindia.Bean"
+        android:name="com.technuoma.easyHomezIndia.Bean"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
-        <activity android:name="com.technuoma.emartindia.Address"/>
-        <activity android:name="com.technuoma.emartindia.Web" />
+        <activity android:name="com.technuoma.easyHomezIndia.Address" />
+        <activity android:name="com.technuoma.easyHomezIndia.Web" />
         <activity
-            android:name="com.technuoma.emartindia.OrderDetails"
+            android:name="com.technuoma.easyHomezIndia.OrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.OTP"
+            android:name="com.technuoma.easyHomezIndia.OTP"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Location"
+            android:name="com.technuoma.easyHomezIndia.Location"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Search"
+            android:name="com.technuoma.easyHomezIndia.Search"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Orders"
+            android:name="com.technuoma.easyHomezIndia.Orders"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Checkout"
+            android:name="com.technuoma.easyHomezIndia.Checkout"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Cart"
+            android:name="com.technuoma.easyHomezIndia.Cart"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.SingleProduct"
+            android:name="com.technuoma.easyHomezIndia.SingleProduct"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Products"
+            android:name="com.technuoma.easyHomezIndia.Products"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.SubCat"
+            android:name="com.technuoma.easyHomezIndia.SubCat"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Category"
+            android:name="com.technuoma.easyHomezIndia.Category"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Login"
+            android:name="com.technuoma.easyHomezIndia.Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.emartindia.Spalsh"
+            android:name="com.technuoma.easyHomezIndia.Spalsh"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,11 +64,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.technuoma.emartindia.MainActivity" />
-        <activity android:name="com.technuoma.emartindia.WebViewActivity" />
+        <activity android:name="com.technuoma.easyHomezIndia.MainActivity" />
+        <activity android:name="com.technuoma.easyHomezIndia.WebViewActivity" />
 
         <service
-            android:name="com.technuoma.emartindia.MyFirebaseMessagingService"
+            android:name="com.technuoma.easyHomezIndia.MyFirebaseMessagingService"
             android:permission="">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
