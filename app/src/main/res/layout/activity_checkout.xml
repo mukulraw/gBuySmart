@@ -194,7 +194,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Locality/ Area/ District *"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
@@ -221,7 +221,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="City *"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
@@ -248,7 +248,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="PIN Code *"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
@@ -275,7 +275,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Delivery Date"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioButton" />
 
@@ -302,7 +302,7 @@
                 android:layout_marginEnd="8dp"
                 android:gravity="start|center_vertical"
                 android:text="TextView"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -314,7 +314,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="start|center_vertical"
                 android:text="₹ 0"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView53"
                 app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
@@ -326,7 +326,7 @@
                 android:layout_marginEnd="8dp"
                 android:gravity="start|center_vertical"
                 android:text="TextView"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView50" />
@@ -338,7 +338,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Grand Total: "
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/textView51"
                 app:layout_constraintTop_toBottomOf="@+id/textView53" />
@@ -350,7 +350,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Delivery Charges: "
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/textView51"
                 app:layout_constraintTop_toBottomOf="@+id/textView54" />
 
@@ -361,7 +361,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:text="Amount: "
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/textView51"
                 app:layout_constraintTop_toTopOf="parent" />
 
