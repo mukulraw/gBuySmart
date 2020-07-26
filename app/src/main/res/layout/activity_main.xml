@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/shade"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,45 +29,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="4dp"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme"
-                    app:subtitleTextColor="#000"
-                    app:title="@string/app_name"
-                    app:titleTextColor="#000">
+                    android:minHeight="?attr/actionBarSize">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#00000000"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="eMartIndia"
-                            android:textColor="#000"
-                            android:textSize="20sp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:gravity="right"
+                            android:orientation="vertical"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentStart="true">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Delivery Location"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Delhi, India"
+                                android:textColor="#ffffff"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_alignParentEnd="true"
                             android:orientation="horizontal">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
+                                android:layout_gravity="end"
                                 android:layout_marginEnd="18dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton3"
                                     android:layout_width="22dp"
                                     android:layout_height="22dp"
-                                    android:background="@drawable/shopping_bag"
+                                    android:background="@drawable/ic_shopping_bag"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -94,11 +104,56 @@
 
 
                         </LinearLayout>
+                    </RelativeLayout>
 
-                    </LinearLayout>
 
                 </androidx.appcompat.widget.Toolbar>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Categories"
+                        android:background="@drawable/white_back_round2"
+                        android:minHeight="0dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAllCaps="false"
+                        android:minWidth="0dp"
+                        android:textSize="14sp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="4dp"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Search for products"
+                        android:textAllCaps="false"
+                        android:gravity="start"
+                        android:background="@drawable/white_back_round2"
+                        android:textColor="#C4C4C4"
+                        android:minHeight="0dp"
+                        android:textSize="14sp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:minWidth="0dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
