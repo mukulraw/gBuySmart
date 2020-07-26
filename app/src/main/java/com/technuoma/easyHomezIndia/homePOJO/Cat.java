@@ -19,6 +19,9 @@ public class Cat {
     @SerializedName("tag")
     @Expose
     private String tag;
+    @SerializedName("description")
+    @Expose
+    private String description;
 
     public String getId() {
         return id;
@@ -58,5 +61,13 @@ public class Cat {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -156,7 +156,7 @@ public class Category extends AppCompatActivity {
 
             //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
-            //holder.desc.setText(item.getDesc());
+            holder.desc.setText(item.getDescription());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

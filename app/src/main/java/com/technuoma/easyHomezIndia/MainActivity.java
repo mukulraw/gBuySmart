@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
                 intent.putExtra("title", "Terms & Conditions");
-                intent.putExtra("url", "https://technuoma.com/emartindia/terms.php");
+                intent.putExtra("url", "https://technuoma.com/easyhomez/terms.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -282,8 +282,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, Web.class);
-                intent.putExtra("title", "FAQs");
-                intent.putExtra("url", "https://technuoma.com/emartindia/faq.php");
+                intent.putExtra("title", "About Us");
+                intent.putExtra("url", "https://technuoma.com/easyhomez/about.php");
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
             //holder.tag.setText(item.getTag());
             holder.title.setText(item.getName());
-            //holder.desc.setText(item.getDesc());
+            holder.desc.setText(item.getDescription());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
