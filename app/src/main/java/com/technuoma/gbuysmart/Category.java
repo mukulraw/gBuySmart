@@ -142,7 +142,7 @@ public class Category extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.category_list_model1, parent, false);
+            View view = inflater.inflate(R.layout.category_list_model2, parent, false);
             return new ViewHolder(view);
         }
 
