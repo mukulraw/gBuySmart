@@ -12,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,53 +33,39 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Orders extends AppCompatActivity {
+public class Orders extends Fragment {
 
-    Toolbar toolbar;
     ProgressBar progress;
     RecyclerView grid;
     OrdersAdapter adapter;
     List<Datum> list;
     GridLayoutManager manager;
-
+    MainActivity mainActivity;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_orders , container , false);
+        mainActivity = (MainActivity)getActivity();
         list = new ArrayList<>();
 
-        toolbar = findViewById(R.id.toolbar3);
-        progress = findViewById(R.id.progressBar3);
-        grid = findViewById(R.id.grid);
+        progress = view.findViewById(R.id.progressBar3);
+        grid = view.findViewById(R.id.grid);
 
-        setSupportActionBar(toolbar);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        toolbar.setNavigationIcon(R.drawable.ic_back);
+        adapter = new OrdersAdapter(list, mainActivity);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle("My Orders");
-
-        adapter = new OrdersAdapter(list, this);
-
-        manager = new GridLayoutManager(this, 1);
+        manager = new GridLayoutManager(mainActivity, 1);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
 
+        return view;
     }
 
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         loadCart();
@@ -87,7 +75,7 @@ public class Orders extends AppCompatActivity {
     void loadCart() {
         progress.setVisibility(View.VISIBLE);
 
-        Bean b = (Bean) getApplicationContext();
+        Bean b = (Bean) mainActivity.getApplicationContext();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -112,8 +100,8 @@ public class Orders extends AppCompatActivity {
 
                 } else {
                     adapter.setgrid(response.body().getData());
-                    finish();
-                    Toast.makeText(Orders.this, "No order found", Toast.LENGTH_SHORT).show();
+                    mainActivity.navigation.setSelectedItemId(R.id.action_home);
+                    Toast.makeText(mainActivity, "No order found", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -150,7 +138,7 @@ public class Orders extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = inflater.inflate(R.layout.order_list_item, viewGroup, false);
 

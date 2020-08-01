@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -51,6 +53,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.technuoma.gbuysmart.cartPOJO.cartBean;
 import com.technuoma.gbuysmart.homePOJO.Banners;
@@ -79,81 +82,37 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements ResultCallback<LocationSettingsResult> {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     Toolbar toolbar;
     DrawerLayout drawer;
-    AutoViewPager pager;
-    ProgressBar progress;
-    RecyclerView categories, recent, loved, banner;
-    BestAdapter adapter2, adapter3;
-    BestAdapter adapter4;
-    BestAdapter adapter5;
-    BestAdapter adapter7;
-    CategoryAdapter adapter6;
-    List<Best> list;
-    List<Best> list1;
-    List<Best> list2;
-    List<Cat> list3;
-    List<Banners> list4;
-    TextView count, rewards, login, terms, about, address, logout, cart, orders, refer, location;
+    TextView count, location;
     ImageButton cart1;
-    Button search , cate;
-    OfferAdapter adapter;
 
-    ImageView banner1, banner2, banner3;
-
-    private FusedLocationProviderClient fusedLocationClient;
-
-    String lat = "", lng = "";
-
-    LocationSettingsRequest.Builder builder;
-    LocationRequest locationRequest;
-
-    protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+    BottomNavigationView navigation;
+    TextView rewards, login, terms, about, address, logout, cart, orders, refer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
 
         toolbar = findViewById(R.id.toolbar);
-        banner1 = findViewById(R.id.banner1);
-        banner2 = findViewById(R.id.banner2);
-        banner3 = findViewById(R.id.banner3);
-
-        refer = findViewById(R.id.refer);
-        cate = findViewById(R.id.cate);
+        navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         location = findViewById(R.id.location);
-        orders = findViewById(R.id.orders);
-        banner = findViewById(R.id.banner);
-        pager = findViewById(R.id.viewPager);
-        pager.setPageMargin(20);
-        progress = findViewById(R.id.progress);
-        // indicator = findViewById(R.id.indicator);
-        categories = findViewById(R.id.categories);
-        loved = findViewById(R.id.loved);
-        recent = findViewById(R.id.recent);
         count = findViewById(R.id.count);
+        refer = findViewById(R.id.refer);
+        orders = findViewById(R.id.orders);
         rewards = findViewById(R.id.rewards);
-        cart1 = findViewById(R.id.imageButton3);
         login = findViewById(R.id.textView3);
         terms = findViewById(R.id.terms);
         about = findViewById(R.id.about);
         address = findViewById(R.id.address);
         logout = findViewById(R.id.logout);
         cart = findViewById(R.id.cart);
-        search = findViewById(R.id.search);
-
-        list = new ArrayList<>();
-        list1 = new ArrayList<>();
-        list2 = new ArrayList<>();
-        list3 = new ArrayList<>();
-        list4 = new ArrayList<>();
+        cart1 = findViewById(R.id.imageButton3);
 
         setSupportActionBar(toolbar);
 
@@ -166,38 +125,89 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
 
-        adapter = new OfferAdapter(this, list4);
-        adapter2 = new BestAdapter(this, list);
-        adapter3 = new BestAdapter(this, list);
-        adapter4 = new BestAdapter(this, list1);
-        adapter5 = new BestAdapter(this, list2);
-        adapter6 = new CategoryAdapter(this, list3);
-        adapter7 = new BestAdapter(this, list2);
+                        FragmentManager fm = getSupportFragmentManager();
 
-        LinearLayoutManager manager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        LinearLayoutManager manager2 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        LinearLayoutManager manager3 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        LinearLayoutManager manager4 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        LinearLayoutManager manager6 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        GridLayoutManager manager5 = new GridLayoutManager(this, 3);
-        GridLayoutManager manager7 = new GridLayoutManager(this, 1);
+                        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                            fm.popBackStack();
+                        }
 
-        recent.setAdapter(adapter2);
-        recent.setLayoutManager(manager1);
+                        FragmentTransaction ft = fm.beginTransaction();
+                        Home frag1 = new Home();
+                        ft.replace(R.id.replace, frag1);
+                        //ft.addToBackStack(null);
+                        ft.commit();
+                        drawer.closeDrawer(GravityCompat.START);
 
-        loved.setAdapter(adapter3);
-        loved.setLayoutManager(manager2);
+                        break;
+                    case R.id.action_categories:
+                        FragmentManager fm1 = getSupportFragmentManager();
 
+                        for (int i = 0; i < fm1.getBackStackEntryCount(); ++i) {
+                            fm1.popBackStack();
+                        }
 
+                        FragmentTransaction ft1 = fm1.beginTransaction();
+                        Category frag11 = new Category();
+                        ft1.replace(R.id.replace, frag11);
+                        //ft.addToBackStack(null);
+                        ft1.commit();
+                        drawer.closeDrawer(GravityCompat.START);
 
+                        break;
+                    case R.id.action_search:
+                        FragmentManager fm2 = getSupportFragmentManager();
 
-        categories.setAdapter(adapter6);
-        categories.setLayoutManager(manager5);
+                        for (int i = 0; i < fm2.getBackStackEntryCount(); ++i) {
+                            fm2.popBackStack();
+                        }
 
+                        FragmentTransaction ft2 = fm2.beginTransaction();
+                        Search frag12 = new Search();
+                        ft2.replace(R.id.replace, frag12);
+                        //ft.addToBackStack(null);
+                        ft2.commit();
+                        drawer.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.action_order:
+                        FragmentManager fm3 = getSupportFragmentManager();
 
-        banner.setAdapter(adapter);
-        banner.setLayoutManager(manager7);
+                        for (int i = 0; i < fm3.getBackStackEntryCount(); ++i) {
+                            fm3.popBackStack();
+                        }
+
+                        FragmentTransaction ft3 = fm3.beginTransaction();
+                        Orders frag13 = new Orders();
+                        ft3.replace(R.id.replace, frag13);
+                        //ft.addToBackStack(null);
+                        ft3.commit();
+                        drawer.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.action_cart:
+                        FragmentManager fm4 = getSupportFragmentManager();
+
+                        for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                            fm4.popBackStack();
+                        }
+
+                        FragmentTransaction ft4 = fm4.beginTransaction();
+                        Cart frag14 = new Cart();
+                        ft4.replace(R.id.replace, frag14);
+                        //ft.addToBackStack(null);
+                        ft4.commit();
+                        drawer.closeDrawer(GravityCompat.START);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        navigation.setSelectedItemId(R.id.action_home);
 
         final String uid = SharePreferenceUtils.getInstance().getString("userId");
 
@@ -253,25 +263,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             }
         });
 
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, Search.class);
-                startActivity(intent);
-
-            }
-        });
-
-        cate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, Category.class);
-                startActivity(intent);
-
-            }
-        });
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,90 +383,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
             }
         });
 
-        createLocationRequest();
 
-    }
-
-    @Override
-    public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
-
-    }
-
-    class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-
-        Context context;
-        List<Cat> list = new ArrayList<>();
-
-        public CategoryAdapter(Context context, List<Cat> list) {
-            this.context = context;
-            this.list = list;
-        }
-
-        public void setData(List<Cat> list) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        String getSpace(int position) {
-            return list.get(position).getSpace();
-        }
-
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.category_list_model2, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            final Cat item = list.get(position);
-
-            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-            ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage(), holder.image, options);
-
-            //holder.tag.setText(item.getTag());
-            holder.title.setText(item.getName());
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent intent = new Intent(context, SubCat.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    intent.putExtra("image", item.getImage());
-                    context.startActivity(intent);
-
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-
-            RoundedImageView image;
-            TextView tag, title;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                image = itemView.findViewById(R.id.imageView5);
-                //tag = itemView.findViewById(R.id.textView17);
-                title = itemView.findViewById(R.id.textView18);
-
-
-            }
-        }
     }
 
 
@@ -483,562 +391,9 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
     protected void onResume() {
         super.onResume();
 
-
-        progress.setVisibility(View.VISIBLE);
-
-        Bean b = (Bean) getApplicationContext();
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.level(HttpLoggingInterceptor.Level.HEADERS);
-        logging.level(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder().writeTimeout(1000, TimeUnit.SECONDS).readTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor(logging).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(b.baseurl)
-                .client(client)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
-
-        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat"), SharePreferenceUtils.getInstance().getString("lng"));
-        call.enqueue(new Callback<homeBean>() {
-            @Override
-            public void onResponse(Call<homeBean> call, Response<homeBean> response) {
-
-
-                if (response.body().getStatus().equals("1")) {
-
-
-                    BannerAdapter adapter1 = new BannerAdapter(getSupportFragmentManager(), response.body().getPbanner());
-                    pager.setAdapter(adapter1);
-
-                    adapter2.setData(response.body().getBest());
-                    adapter3.setData(response.body().getToday());
-                    adapter4.setData(response.body().getBest());
-                    adapter5.setData(response.body().getToday());
-                    adapter7.setData(response.body().getToday());
-                    adapter6.setData(response.body().getCat());
-
-                    Log.d("ssiizzee", String.valueOf(response.body().getObanner().size()));
-
-
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(0).getImage();
-                        loader.displayImage(url, banner1, options);
-
-                        String cid = response.body().getObanner().get(0).getCid();
-                        String tit = response.body().getObanner().get(0).getCname();
-                        String image = response.body().getObanner().get(0).getCatimage();
-
-                        banner1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(1).getImage();
-                        loader.displayImage(url, banner2, options);
-
-                        String cid = response.body().getObanner().get(1).getCid();
-                        String tit = response.body().getObanner().get(1).getCname();
-                        String image = response.body().getObanner().get(1).getCatimage();
-
-                        banner2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-                        ImageLoader loader = ImageLoader.getInstance();
-                        String url = response.body().getObanner().get(2).getImage();
-                        loader.displayImage(url, banner3, options);
-
-                        String cid = response.body().getObanner().get(2).getCid();
-                        String tit = response.body().getObanner().get(2).getCname();
-                        String image = response.body().getObanner().get(2).getCatimage();
-
-                        banner3.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (cid != null) {
-                                    Intent intent = new Intent(MainActivity.this, SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    if (response.body().getObanner().size() > 3) {
-                        List<Banners> ll = response.body().getObanner();
-                        ll.remove(0);
-                        ll.remove(0);
-                        ll.remove(0);
-                        adapter.setData(ll);
-                    }
-
-                    SharePreferenceUtils.getInstance().saveString("location", response.body().getLocation());
-                    location.setText(response.body().getCity());
-
-                }
-
-                progress.setVisibility(View.GONE);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<homeBean> call, Throwable t) {
-                progress.setVisibility(View.GONE);
-            }
-        });
-
         loadCart();
     }
 
-
-    class BannerAdapter extends FragmentStatePagerAdapter {
-
-        List<Banners> blist = new ArrayList<>();
-
-        public BannerAdapter(FragmentManager fm, List<Banners> blist) {
-            super(fm);
-            this.blist = blist;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            page frag = new page();
-            frag.setData(blist.get(position).getImage(), blist.get(position).getCname(), blist.get(position).getCid(), blist.get(position).getCatimage());
-            return frag;
-        }
-
-        @Override
-        public int getCount() {
-            return blist.size();
-        }
-    }
-
-
-    public static class page extends Fragment {
-
-        String url, tit, cid = "", image2;
-
-        ImageView image;
-
-        void setData(String url, String tit, String cid, String image2) {
-            this.url = url;
-            this.tit = tit;
-            this.cid = cid;
-            this.image2 = image2;
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.banner_layout, container, false);
-
-            image = view.findViewById(R.id.imageView3);
-
-            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-            ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(url, image, options);
-
-
-            image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (cid != null) {
-                        Intent intent = new Intent(getContext(), SubCat.class);
-                        intent.putExtra("id", cid);
-                        intent.putExtra("title", tit);
-                        intent.putExtra("image", image2);
-                        startActivity(intent);
-                    }
-
-
-                }
-            });
-
-
-            return view;
-        }
-    }
-
-    class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> {
-
-        Context context;
-        List<Banners> list = new ArrayList<>();
-
-        public OfferAdapter(Context context, List<Banners> list) {
-            this.context = context;
-            this.list = list;
-        }
-
-        public void setData(List<Banners> list) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.best_list_model1, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            Banners item = list.get(position);
-
-            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-            ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage(), holder.image, options);
-
-            holder.image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (item.getCid() != null) {
-                        Intent intent = new Intent(context, SubCat.class);
-                        intent.putExtra("id", item.getCid());
-                        intent.putExtra("title", item.getCname());
-                        intent.putExtra("image", item.getCatimage());
-                        startActivity(intent);
-                    }
-
-
-                }
-            });
-
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-
-            ImageView image;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                image = itemView.findViewById(R.id.imageView4);
-
-
-            }
-        }
-    }
-
-    class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder> {
-
-        Context context;
-        List<Member> list = new ArrayList<>();
-
-        public MemberAdapter(Context context, List<Member> list) {
-            this.context = context;
-            this.list = list;
-        }
-
-        public void setData(List<Member> list) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.member_list_model, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            Member item = list.get(position);
-
-
-            holder.duration.setText(item.getDuration());
-            holder.price.setText("\u20B9 " + item.getPrice());
-
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView duration, price, discount;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                duration = itemView.findViewById(R.id.textView13);
-                price = itemView.findViewById(R.id.textView15);
-                discount = itemView.findViewById(R.id.textView14);
-
-
-            }
-        }
-    }
-
-
-    class BestAdapter extends RecyclerView.Adapter<BestAdapter.ViewHolder> {
-
-        Context context;
-        List<Best> list = new ArrayList<>();
-
-        public BestAdapter(Context context, List<Best> list) {
-            this.context = context;
-            this.list = list;
-        }
-
-        public void setData(List<Best> list) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.best_list_model, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            holder.setIsRecyclable(false);
-
-            final Best item = list.get(position);
-
-            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
-            ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage(), holder.image, options);
-
-            float dis = Float.parseFloat(item.getDiscount());
-
-            final String nv1;
-
-            if (item.getStock().equals("In stock")) {
-                holder.add.setEnabled(true);
-            } else {
-                holder.add.setEnabled(false);
-            }
-
-            holder.stock.setText(item.getStock());
-            holder.size.setText(item.getSize());
-
-            if (dis > 0) {
-
-                float pri = Float.parseFloat(item.getPrice());
-                float dv = (dis / 100) * pri;
-
-                float nv = pri - dv;
-
-                nv1 = String.valueOf(nv);
-
-                holder.discount.setVisibility(View.VISIBLE);
-                holder.discount.setText(item.getDiscount() + "% OFF");
-                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
-                holder.newamount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
-                holder.newamount.setVisibility(View.VISIBLE);
-            } else {
-
-                nv1 = item.getPrice();
-                holder.discount.setVisibility(View.GONE);
-                holder.price.setText("\u20B9 " + item.getPrice());
-                holder.newamount.setVisibility(View.GONE);
-            }
-
-
-            holder.title.setText(item.getName());
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent intent = new Intent(context, SingleProduct.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    context.startActivity(intent);
-
-                }
-            });
-
-            holder.add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    String uid = SharePreferenceUtils.getInstance().getString("userId");
-
-                    if (uid.length() > 0) {
-
-                        final Dialog dialog = new Dialog(context);
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setCancelable(true);
-                        dialog.setContentView(R.layout.add_cart_dialog);
-                        dialog.show();
-
-                        final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
-                        Button add = dialog.findViewById(R.id.button8);
-                        final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
-
-
-                        stepperTouch.setMinValue(1);
-                        stepperTouch.setMaxValue(99);
-                        stepperTouch.setSideTapEnabled(true);
-                        stepperTouch.setCount(1);
-
-                        add.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                progressBar.setVisibility(View.VISIBLE);
-
-                                Bean b = (Bean) getApplicationContext();
-
-
-                                HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-                                logging.level(HttpLoggingInterceptor.Level.HEADERS);
-                                logging.level(HttpLoggingInterceptor.Level.BODY);
-
-                                OkHttpClient client = new OkHttpClient.Builder().writeTimeout(1000, TimeUnit.SECONDS).readTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor(logging).build();
-
-                                Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl(b.baseurl)
-                                        .client(client)
-                                        .addConverterFactory(ScalarsConverterFactory.create())
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-                                AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
-
-                                Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
-                                Log.d("pid", item.getId());
-                                Log.d("quantity", String.valueOf(stepperTouch.getCount()));
-                                Log.d("price", nv1);
-
-                                int versionCode = BuildConfig.VERSION_CODE;
-                                String versionName = BuildConfig.VERSION_NAME;
-
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName);
-
-                                call.enqueue(new Callback<singleProductBean>() {
-                                    @Override
-                                    public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
-
-                                        if (response.body().getStatus().equals("1")) {
-                                            //loadCart();
-                                            dialog.dismiss();
-                                            loadCart();
-                                        }
-
-                                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                                        progressBar.setVisibility(View.GONE);
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<singleProductBean> call, Throwable t) {
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                });
-
-
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(context, "Please login to continue", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, Login.class);
-                        context.startActivity(intent);
-
-                    }
-
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-
-            ImageView image;
-            TextView price, title, discount, stock , newamount , size;
-            Button add;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                image = itemView.findViewById(R.id.imageView4);
-                price = itemView.findViewById(R.id.textView11);
-                title = itemView.findViewById(R.id.textView12);
-                discount = itemView.findViewById(R.id.textView10);
-                add = itemView.findViewById(R.id.button5);
-                stock = itemView.findViewById(R.id.textView63);
-                newamount = itemView.findViewById(R.id.textView6);
-                size = itemView.findViewById(R.id.textView7);
-
-
-            }
-        }
-    }
 
     void loadCart() {
         String uid = SharePreferenceUtils.getInstance().getString("userId");
@@ -1078,13 +433,12 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
                     }
 
-                    progress.setVisibility(View.GONE);
 
                 }
 
                 @Override
                 public void onFailure(Call<cartBean> call, Throwable t) {
-                    progress.setVisibility(View.GONE);
+
                 }
             });
 
@@ -1098,7 +452,6 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
     void getRew() {
 
-        progress.setVisibility(View.VISIBLE);
 
         Bean b = (Bean) getApplicationContext();
 
@@ -1122,122 +475,17 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
                 rewards.setText("Wallet - " + response.body());
-
-                progress.setVisibility(View.GONE);
 
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                progress.setVisibility(View.GONE);
+
             }
         });
 
     }
 
-
-    protected void createLocationRequest() {
-        locationRequest = LocationRequest.create();
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
-
-        SettingsClient client = LocationServices.getSettingsClient(this);
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-
-        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                getLocation();
-            }
-        });
-
-        task.addOnFailureListener(this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    // Location settings are not satisfied, but this can be fixed
-                    // by showing the user a dialog.
-                    try {
-                        // Show the dialog by calling startResolutionForResult(),
-                        // and check the result in onActivityResult().
-                        ResolvableApiException resolvable = (ResolvableApiException) e;
-                        resolvable.startResolutionForResult(MainActivity.this,
-                                REQUEST_CHECK_SETTINGS);
-                    } catch (IntentSender.SendIntentException sendEx) {
-                        // Ignore the error.
-                    }
-                }
-            }
-        });
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            // Check for the integer request code originally supplied to startResolutionForResult().
-            case REQUEST_CHECK_SETTINGS:
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        Log.i(TAG, "User agreed to make required location settings changes.");
-                        getLocation();
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        Toast.makeText(this, "Location is required for this app", Toast.LENGTH_LONG).show();
-                        finishAffinity();
-                        break;
-                }
-                break;
-        }
-    }
-
-    void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        LocationCallback mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    if (location != null) {
-                        //TODO: UI updates.
-                        lat = String.valueOf(location.getLatitude());
-                        lng = String.valueOf(location.getLongitude());
-
-                        SharePreferenceUtils.getInstance().saveString("lat", lat);
-                        SharePreferenceUtils.getInstance().saveString("lng", lng);
-
-                        Log.d("lat123", lat);
-
-                        LocationServices.getFusedLocationProviderClient(MainActivity.this).removeLocationUpdates(this);
-
-                    }
-                }
-            }
-        };
-
-        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, mLocationCallback, null);
-
-    }
 
 }

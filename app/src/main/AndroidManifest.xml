@@ -50,9 +50,6 @@
             android:name="com.technuoma.gbuysmart.SubCat"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.Category"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.technuoma.gbuysmart.Login"
             android:screenOrientation="portrait" />
         <activity

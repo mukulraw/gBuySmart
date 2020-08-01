@@ -14,8 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,43 +37,31 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Search extends AppCompatActivity {
+public class Search extends Fragment {
 
-    Toolbar toolbar;
     RecyclerView grid;
     ProgressBar progress;
     EditText query;
     List<Datum> list;
     SearchAdapter adapter;
     GridLayoutManager manager;
-
+    MainActivity mainActivity;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_search , container , false);
+
+        mainActivity = (MainActivity)getActivity();
 
         list = new ArrayList<>();
 
-        toolbar = findViewById(R.id.toolbar5);
-        grid = findViewById(R.id.grid);
-        progress = findViewById(R.id.progressBar5);
-        query = findViewById(R.id.editText4);
+        grid = view.findViewById(R.id.grid);
+        progress = view.findViewById(R.id.progressBar5);
+        query = view.findViewById(R.id.editText4);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle("Search");
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
 
-        });
-
-        adapter = new SearchAdapter(this , list);
-        manager = new GridLayoutManager(this , 1);
+        adapter = new SearchAdapter(mainActivity , list);
+        manager = new GridLayoutManager(mainActivity , 1);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
@@ -93,7 +83,7 @@ public class Search extends AppCompatActivity {
 
                     progress.setVisibility(View.VISIBLE);
 
-                    Bean b = (Bean) getApplicationContext();
+                    Bean b = (Bean) mainActivity.getApplicationContext();
 
                     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
                     logging.level(HttpLoggingInterceptor.Level.HEADERS);
@@ -148,7 +138,7 @@ public class Search extends AppCompatActivity {
             }
         });
 
-
+        return view;
     }
 
     class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>
@@ -172,7 +162,7 @@ public class Search extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.search_list_model , parent , false);
             return new ViewHolder(view);
         }
