@@ -29,26 +29,9 @@
             android:name="com.technuoma.gbuysmart.Location"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.Search"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.technuoma.gbuysmart.Orders"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.technuoma.gbuysmart.Checkout"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.technuoma.gbuysmart.Cart"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.technuoma.gbuysmart.SingleProduct"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.technuoma.gbuysmart.Products"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.technuoma.gbuysmart.SubCat"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.technuoma.gbuysmart.Login"
             android:screenOrientation="portrait" />

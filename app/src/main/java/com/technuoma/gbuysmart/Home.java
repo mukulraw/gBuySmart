@@ -108,14 +108,14 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
 
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
-    MainActivity mainActivity;
+    static MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
 
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (MainActivity) getActivity();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity);
 
@@ -245,11 +245,24 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(context, SubCat.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    intent.putExtra("image", item.getImage());
-                    context.startActivity(intent);
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                    for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                        fm4.popBackStack();
+                    }
+
+                    FragmentTransaction ft4 = fm4.beginTransaction();
+                    SubCat frag14 = new SubCat();
+                    Bundle b = new Bundle();
+                    b.putString("id", item.getId());
+                    b.putString("title", item.getName());
+                    b.putString("image", item.getImage());
+                    frag14.setArguments(b);
+                    ft4.replace(R.id.replace, frag14);
+                    ft4.addToBackStack(null);
+                    //ft.addToBackStack(null);
+                    ft4.commit();
+
 
                 }
             });
@@ -309,18 +322,22 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
 
                 if (response.body().getStatus().equals("1")) {
 
+                    try {
+                        BannerAdapter adapter1 = new BannerAdapter(getChildFragmentManager(), response.body().getPbanner());
+                        pager.setAdapter(adapter1);
 
-                    BannerAdapter adapter1 = new BannerAdapter(getChildFragmentManager(), response.body().getPbanner());
-                    pager.setAdapter(adapter1);
+                        adapter2.setData(response.body().getBest());
+                        adapter3.setData(response.body().getToday());
+                        adapter4.setData(response.body().getBest());
+                        adapter5.setData(response.body().getToday());
+                        adapter7.setData(response.body().getToday());
+                        adapter6.setData(response.body().getCat());
 
-                    adapter2.setData(response.body().getBest());
-                    adapter3.setData(response.body().getToday());
-                    adapter4.setData(response.body().getBest());
-                    adapter5.setData(response.body().getToday());
-                    adapter7.setData(response.body().getToday());
-                    adapter6.setData(response.body().getCat());
+                        Log.d("ssiizzee", String.valueOf(response.body().getObanner().size()));
+                    } catch (Exception e) {
 
-                    Log.d("ssiizzee", String.valueOf(response.body().getObanner().size()));
+                        e.printStackTrace();
+                    }
 
 
                     try {
@@ -337,11 +354,25 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                             @Override
                             public void onClick(View view) {
                                 if (cid != null) {
-                                    Intent intent = new Intent(getContext(), SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
+
+                                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                                    for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                                        fm4.popBackStack();
+                                    }
+
+                                    FragmentTransaction ft4 = fm4.beginTransaction();
+                                    SubCat frag14 = new SubCat();
+                                    Bundle b = new Bundle();
+                                    b.putString("id", cid);
+                                    b.putString("title", tit);
+                                    b.putString("image", image);
+                                    frag14.setArguments(b);
+                                    ft4.replace(R.id.replace, frag14);
+                                    ft4.addToBackStack(null);
+                                    //ft.addToBackStack(null);
+                                    ft4.commit();
+
                                 }
                             }
                         });
@@ -364,11 +395,23 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                             @Override
                             public void onClick(View view) {
                                 if (cid != null) {
-                                    Intent intent = new Intent(getContext(), SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
+                                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                                    for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                                        fm4.popBackStack();
+                                    }
+
+                                    FragmentTransaction ft4 = fm4.beginTransaction();
+                                    SubCat frag14 = new SubCat();
+                                    Bundle b = new Bundle();
+                                    b.putString("id", cid);
+                                    b.putString("title", tit);
+                                    b.putString("image", image);
+                                    frag14.setArguments(b);
+                                    ft4.replace(R.id.replace, frag14);
+                                    ft4.addToBackStack(null);
+                                    //ft.addToBackStack(null);
+                                    ft4.commit();
                                 }
                             }
                         });
@@ -392,11 +435,23 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                             @Override
                             public void onClick(View view) {
                                 if (cid != null) {
-                                    Intent intent = new Intent(getContext(), SubCat.class);
-                                    intent.putExtra("id", cid);
-                                    intent.putExtra("title", tit);
-                                    intent.putExtra("image", image);
-                                    startActivity(intent);
+                                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                                    for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                                        fm4.popBackStack();
+                                    }
+
+                                    FragmentTransaction ft4 = fm4.beginTransaction();
+                                    SubCat frag14 = new SubCat();
+                                    Bundle b = new Bundle();
+                                    b.putString("id", cid);
+                                    b.putString("title", tit);
+                                    b.putString("image", image);
+                                    frag14.setArguments(b);
+                                    ft4.replace(R.id.replace, frag14);
+                                    ft4.addToBackStack(null);
+                                    //ft.addToBackStack(null);
+                                    ft4.commit();
                                 }
                             }
                         });
@@ -406,17 +461,21 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                         e.printStackTrace();
                     }
 
+                    try {
+                        if (response.body().getObanner().size() > 3) {
+                            List<Banners> ll = response.body().getObanner();
+                            ll.remove(0);
+                            ll.remove(0);
+                            ll.remove(0);
+                            adapter.setData(ll);
+                        }
 
-                    if (response.body().getObanner().size() > 3) {
-                        List<Banners> ll = response.body().getObanner();
-                        ll.remove(0);
-                        ll.remove(0);
-                        ll.remove(0);
-                        adapter.setData(ll);
+                        SharePreferenceUtils.getInstance().saveString("location", response.body().getLocation());
+                        mainActivity.location.setText(response.body().getCity());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                    SharePreferenceUtils.getInstance().saveString("location", response.body().getLocation());
-                    mainActivity.location.setText(response.body().getCity());
 
                 }
 
@@ -486,11 +545,23 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                 public void onClick(View v) {
 
                     if (cid != null) {
-                        Intent intent = new Intent(getContext(), SubCat.class);
-                        intent.putExtra("id", cid);
-                        intent.putExtra("title", tit);
-                        intent.putExtra("image", image2);
-                        startActivity(intent);
+                        FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                        for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                            fm4.popBackStack();
+                        }
+
+                        FragmentTransaction ft4 = fm4.beginTransaction();
+                        SubCat frag14 = new SubCat();
+                        Bundle b = new Bundle();
+                        b.putString("id", cid);
+                        b.putString("title", tit);
+                        b.putString("image", image2);
+                        frag14.setArguments(b);
+                        ft4.replace(R.id.replace, frag14);
+                        ft4.addToBackStack(null);
+                        //ft.addToBackStack(null);
+                        ft4.commit();
                     }
 
 
@@ -539,11 +610,23 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                 public void onClick(View v) {
 
                     if (item.getCid() != null) {
-                        Intent intent = new Intent(context, SubCat.class);
-                        intent.putExtra("id", item.getCid());
-                        intent.putExtra("title", item.getCname());
-                        intent.putExtra("image", item.getCatimage());
-                        startActivity(intent);
+                        FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                        for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                            fm4.popBackStack();
+                        }
+
+                        FragmentTransaction ft4 = fm4.beginTransaction();
+                        SubCat frag14 = new SubCat();
+                        Bundle b = new Bundle();
+                        b.putString("id", item.getCid());
+                        b.putString("title", item.getCname());
+                        b.putString("image", item.getCatimage());
+                        frag14.setArguments(b);
+                        ft4.replace(R.id.replace, frag14);
+                        ft4.addToBackStack(null);
+                        //ft.addToBackStack(null);
+                        ft4.commit();
                     }
 
 
@@ -705,10 +788,17 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(context, SingleProduct.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    context.startActivity(intent);
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                    FragmentTransaction ft4 = fm4.beginTransaction();
+                    SingleProduct frag14 = new SingleProduct();
+                    Bundle b = new Bundle();
+                    b.putString("id", item.getId());
+                    b.putString("title", item.getName());
+                    frag14.setArguments(b);
+                    ft4.replace(R.id.replace, frag14);
+                    ft4.addToBackStack(null);
+                    ft4.commit();
 
                 }
             });

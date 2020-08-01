@@ -238,12 +238,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (uid.length() > 0) {
-                    Intent intent = new Intent(MainActivity.this, Cart.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Please login to continue", Toast.LENGTH_SHORT).show();
-                }
+                navigation.setSelectedItemId(R.id.action_cart);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -355,12 +350,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (uid.length() > 0) {
-                    Intent intent = new Intent(MainActivity.this, Cart.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Please login to continue", Toast.LENGTH_SHORT).show();
-                }
+                navigation.setSelectedItemId(R.id.action_cart);
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -371,12 +361,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (uid.length() > 0) {
-                    Intent intent = new Intent(MainActivity.this, Orders.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Please login to continue", Toast.LENGTH_SHORT).show();
-                }
+                navigation.setSelectedItemId(R.id.action_order);
 
                 drawer.closeDrawer(GravityCompat.START);
 

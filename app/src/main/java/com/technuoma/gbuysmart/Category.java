@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -154,11 +156,22 @@ public class Category extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(context, SubCat.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    intent.putExtra("image", item.getImage());
-                    context.startActivity(intent);
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                    for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
+                        fm4.popBackStack();
+                    }
+
+                    FragmentTransaction ft4 = fm4.beginTransaction();
+                    SubCat frag14 = new SubCat();
+                    Bundle b = new Bundle();
+                    b.putString("id", item.getId());
+                    b.putString("title", item.getName());
+                    b.putString("image", item.getImage());
+                    frag14.setArguments(b);
+                    ft4.replace(R.id.replace, frag14);
+                    ft4.addToBackStack(null);
+                    ft4.commit();
 
                 }
             });

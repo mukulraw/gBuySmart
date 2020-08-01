@@ -19,6 +19,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,12 +55,12 @@ public class productList extends Fragment {
 
     List<Datum> list;
     BestAdapter adapter;
-
+    MainActivity mainActivity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.product_layout, container, false);
-
+        mainActivity = (MainActivity)getActivity();
         list = new ArrayList<>();
 
         id = getArguments().getString("id");
@@ -199,10 +201,18 @@ public class productList extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(context, SingleProduct.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    context.startActivity(intent);
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                    FragmentTransaction ft4 = fm4.beginTransaction();
+                    SingleProduct frag14 = new SingleProduct();
+                    Bundle b = new Bundle();
+                    b.putString("id", item.getId());
+                    b.putString("title", item.getName());
+                    frag14.setArguments(b);
+                    ft4.replace(R.id.replace, frag14);
+                    ft4.addToBackStack(null);
+                    ft4.commit();
+
 
                 }
             });
@@ -270,7 +280,7 @@ public class productList extends Fragment {
                                     public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
 
                                         if (response.body().getStatus().equals("1")) {
-                                            //loadCart();
+                                            mainActivity.loadCart();
                                             dialog.dismiss();
                                         }
 

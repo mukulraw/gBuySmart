@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,8 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,9 +39,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class SingleProduct extends AppCompatActivity {
+public class SingleProduct extends Fragment {
 
-    Toolbar toolbar;
     ImageView image;
     TextView discount , title , price;
     Button add;
@@ -48,43 +52,31 @@ public class SingleProduct extends AppCompatActivity {
 
     String pid , nv1;
 
+    MainActivity mainActivity;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_product);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_single_product , container , false);
+        mainActivity = (MainActivity)getActivity();
+        id = getArguments().getString("id");
+        name = getArguments().getString("title");
 
-        id = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("title");
+        image = view.findViewById(R.id.image);
+        discount = view.findViewById(R.id.discount);
+        title = view.findViewById(R.id.title);
+        price = view.findViewById(R.id.price);
+        add = view.findViewById(R.id.add);
+        brand = view.findViewById(R.id.brand);
+        unit = view.findViewById(R.id.unit);
+        seller = view.findViewById(R.id.seller);
+        description = view.findViewById(R.id.description);
+        key_features = view.findViewById(R.id.key_features);
+        packaging = view.findViewById(R.id.packaging);
+        life = view.findViewById(R.id.life);
+        disclaimer = view.findViewById(R.id.disclaimer);
+        progress = view.findViewById(R.id.progress);
+        stock = view.findViewById(R.id.stock);
 
-        toolbar = findViewById(R.id.toolbar);
-        image = findViewById(R.id.image);
-        discount = findViewById(R.id.discount);
-        title = findViewById(R.id.title);
-        price = findViewById(R.id.price);
-        add = findViewById(R.id.add);
-        brand = findViewById(R.id.brand);
-        unit = findViewById(R.id.unit);
-        seller = findViewById(R.id.seller);
-        description = findViewById(R.id.description);
-        key_features = findViewById(R.id.key_features);
-        packaging = findViewById(R.id.packaging);
-        life = findViewById(R.id.life);
-        disclaimer = findViewById(R.id.disclaimer);
-        progress = findViewById(R.id.progress);
-        stock = findViewById(R.id.stock);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle(name);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-
-        });
 
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +91,7 @@ public class SingleProduct extends AppCompatActivity {
                     if (uid.length() > 0)
                     {
 
-                        final Dialog dialog = new Dialog(SingleProduct.this);
+                        final Dialog dialog = new Dialog(mainActivity);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(true);
                         dialog.setContentView(R.layout.add_cart_dialog);
@@ -122,7 +114,7 @@ public class SingleProduct extends AppCompatActivity {
 
                                 progressBar.setVisibility(View.VISIBLE);
 
-                                Bean b = (Bean) getApplicationContext();
+                                Bean b = (Bean) mainActivity.getApplicationContext();
 
 
                                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -155,11 +147,11 @@ public class SingleProduct extends AppCompatActivity {
 
                                         if (response.body().getStatus().equals("1"))
                                         {
-                                            //loadCart();
+                                            mainActivity.loadCart();
                                             dialog.dismiss();
                                         }
 
-                                        Toast.makeText(SingleProduct.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mainActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                                         progressBar.setVisibility(View.GONE);
 
@@ -178,8 +170,8 @@ public class SingleProduct extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(SingleProduct.this, "Please login to continue", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SingleProduct.this , Login.class);
+                        Toast.makeText(mainActivity, "Please login to continue", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(mainActivity , Login.class);
                         startActivity(intent);
 
                     }
@@ -190,16 +182,16 @@ public class SingleProduct extends AppCompatActivity {
             }
         });
 
-
+        return view;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         progress.setVisibility(View.VISIBLE);
 
-        Bean b = (Bean) getApplicationContext();
+        Bean b = (Bean) mainActivity.getApplicationContext();
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.level(HttpLoggingInterceptor.Level.HEADERS);
