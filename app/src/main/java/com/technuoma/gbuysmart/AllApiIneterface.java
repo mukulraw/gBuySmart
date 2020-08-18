@@ -147,6 +147,13 @@ public interface AllApiIneterface {
     );
 
     @Multipart
+    @POST("gbuysmart/api/getOrderId.php")
+    Call<payBean> getOrderId(
+            @Part("amount") String amount,
+            @Part("receipt") String receipt
+    );
+
+    @Multipart
     @POST("gbuysmart/api/buyVouchers.php")
     Call<checkoutBean> buyVouchers(
             @Part("user_id") String user_id,
