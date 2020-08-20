@@ -65,7 +65,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
     RadioGroup group;
     String oid;
     TextView date;
-    TextView amount, grand;
+    TextView amount, grand , delivery;
     String dd = "";
     List<String> ts;
 
@@ -75,6 +75,8 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
     List<Datum> adlist;
 
     String isnew = "1";
+
+    int del = 25;
 
 
     @Override
@@ -93,6 +95,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
         amm = getIntent().getStringExtra("amount");
 
         toolbar = findViewById(R.id.toolbar4);
+        delivery = findViewById(R.id.textView50);
         name = findViewById(R.id.editText2);
         address = findViewById(R.id.editText3);
         proceed = findViewById(R.id.button6);
@@ -129,7 +132,18 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
         amount.setText("₹ " + amm);
 
-        float gt = Float.parseFloat(amm) + 0;
+        float am = Float.parseFloat(amm);
+
+        float gt = 0;
+
+        if (am >= 1000) {
+            gt = Float.parseFloat(amm) + 0;
+            delivery.setText("₹ " + 0);
+        } else {
+            gt = Float.parseFloat(amm) + del;
+            delivery.setText("₹ " + del);
+        }
+
 
         grand.setText("₹ " + gt);
 
@@ -753,7 +767,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
             Log.d("today", currentTime);
 
-            String time1 = "19:30";
+            String time1 = "16:00";
             String time2 = "11:30";
             String time3 = "14:00";
             String time4 = "16:00";
@@ -813,7 +827,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
             if (date1.compareTo(cd) > 0) {
-                ts.add("6 AM - 10 PM");
+                ts.add("5 AM - 5 PM");
             }
 
            /* if (date2.compareTo(cd) > 0)
@@ -853,7 +867,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
             tslot = "";
 
 
-            ts.add("6 AM - 10 PM");
+            ts.add("5 AM - 5 PM");
             //ts.add("11:30 - 1:30");
             //ts.add("2:00 - 4:00");
             //ts.add("4:00 - 6:00");
