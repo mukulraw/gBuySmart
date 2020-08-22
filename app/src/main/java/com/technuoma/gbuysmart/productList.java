@@ -168,29 +168,35 @@ public class productList extends Fragment {
             holder.stock.setText(item.getStock());
             holder.size.setText(item.getSize());
 
-            float dis = Float.parseFloat(item.getDiscount());
+            float mrp = Float.parseFloat(item.getPrice());
+            float sel = Float.parseFloat(item.getDiscount());
+            float dis = mrp - sel;
+
             String nv1 = null;
 
 
             if (dis > 0) {
-
+/*
                 float pri = Float.parseFloat(item.getPrice());
                 float dv = (dis / 100) * pri;
 
                 float nv = pri - dv;
 
-                nv1 = String.valueOf(nv);
+
 
                 holder.discount.setVisibility(View.VISIBLE);
-                holder.discount.setText(item.getDiscount() + "% OFF");
-                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
+                holder.discount.setText(item.getDiscount() + "% OFF");*/
+
+                nv1 = String.valueOf(item.getDiscount());
+
+                holder.price.setText(Html.fromHtml("\u20B9 " + item.getDiscount()));
                 holder.newamount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
                 holder.newamount.setVisibility(View.VISIBLE);
             } else {
 
                 nv1 = item.getPrice();
-                holder.discount.setVisibility(View.GONE);
-                holder.price.setText("\u20B9 " + item.getPrice());
+                //holder.discount.setVisibility(View.GONE);
+                holder.price.setText("\u20B9 " + item.getDiscount());
                 holder.newamount.setVisibility(View.GONE);
             }
 
