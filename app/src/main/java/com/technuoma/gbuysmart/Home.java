@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
@@ -61,6 +63,7 @@ import com.technuoma.gbuysmart.seingleProductPOJO.singleProductBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import nl.dionsegijn.steppertouch.StepperTouch;
@@ -471,9 +474,16 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
                         }
 
                         SharePreferenceUtils.getInstance().saveString("location", response.body().getLocation());
-                        mainActivity.location.setText(response.body().getCity());
+
+                        Geocoder geocoder = new Geocoder(mainActivity, Locale.getDefault());
+                        List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(SharePreferenceUtils.getInstance().getString("lat")), Double.parseDouble(SharePreferenceUtils.getInstance().getString("lng")), 1);
+
+                        Log.d("address", addresses.toString());
+
+                        mainActivity.location.setText(addresses.get(0).getAddressLine(0));
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.d("address", e.toString());
                     }
 
 
