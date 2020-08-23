@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -113,6 +114,8 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
 
     static MainActivity mainActivity;
 
+    CardView member;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -125,6 +128,7 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
         banner1 = view.findViewById(R.id.banner1);
         banner2 = view.findViewById(R.id.banner2);
         banner3 = view.findViewById(R.id.banner3);
+        member = view.findViewById(R.id.member);
 
         cate = view.findViewById(R.id.cate);
 
@@ -190,6 +194,16 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
             public void onClick(View view) {
 
                 mainActivity.navigation.setSelectedItemId(R.id.action_categories);
+
+            }
+        });
+
+        member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(mainActivity, Membership.class);
+                startActivity(intent);
 
             }
         });

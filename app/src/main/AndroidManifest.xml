@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.technuoma.gbuysmart.Bean"
+        android:name=".Bean"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,27 +16,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name="com.technuoma.gbuysmart.Address" />
-        <activity android:name="com.technuoma.gbuysmart.Web" />
+        <activity android:name=".Membership"></activity>
+        <activity android:name=".Address" />
+        <activity android:name=".Web" />
         <activity
-            android:name="com.technuoma.gbuysmart.OrderDetails"
+            android:name=".OrderDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.OTP"
+            android:name=".OTP"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.Location"
+            android:name=".Location"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.Checkout"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.technuoma.gbuysmart.Login"
+            android:name=".Checkout"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.technuoma.gbuysmart.Spalsh"
+            android:name=".Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Spalsh"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,11 +43,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.technuoma.gbuysmart.MainActivity" />
-        <activity android:name="com.technuoma.gbuysmart.WebViewActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".WebViewActivity" />
 
         <service
-            android:name="com.technuoma.gbuysmart.MyFirebaseMessagingService"
+            android:name=".MyFirebaseMessagingService"
             android:permission="">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
