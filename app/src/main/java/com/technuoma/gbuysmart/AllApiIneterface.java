@@ -173,4 +173,19 @@ public interface AllApiIneterface {
             @Part("pin") String pin,
             @Part("isnew") String isnew
     );
+
+    @Multipart
+    @POST("gbuysmart/api/getMembership.php")
+    Call<getMembershipBean> getMembership(
+            @Part("user_id") String user_id
+    );
+
+    @Multipart
+    @POST("gbuysmart/api/buyMembership.php")
+    Call<checkoutBean> buyMembership(
+            @Part("user_id") String user_id,
+            @Part("membership") String membership,
+            @Part("payment_id") String payment_id
+    );
+
 }
