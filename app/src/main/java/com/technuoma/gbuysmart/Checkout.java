@@ -138,10 +138,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
         if (am >= 1000) {
             gt = Float.parseFloat(amm) + 0;
-            delivery.setText("₹ " + 0);
+            //delivery.setText("₹ " + 0);
         } else {
-            gt = Float.parseFloat(amm) + del;
-            delivery.setText("₹ " + del);
+            gt = Float.parseFloat(amm) + 0;
+            //delivery.setText("₹ " + del);
         }
 
 

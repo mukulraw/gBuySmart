@@ -300,8 +300,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="start|center_vertical"
-                android:text="TextView"
                 android:textColor="@color/black"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -315,7 +315,8 @@
                 android:text="₹ 0"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView53"
-                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+                app:layout_constraintTop_toBottomOf="@+id/textView49"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView51"
@@ -328,7 +329,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+                app:layout_constraintTop_toBottomOf="@+id/textView50"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView52"
@@ -340,7 +342,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/textView51"
-                app:layout_constraintTop_toBottomOf="@+id/textView53" />
+                app:layout_constraintTop_toBottomOf="@+id/textView53"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView53"
@@ -351,7 +354,8 @@
                 android:text="Delivery Charges: "
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/textView51"
-                app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                app:layout_constraintTop_toBottomOf="@+id/textView54"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView54"
@@ -361,7 +365,8 @@
                 android:layout_marginEnd="8dp"
                 android:text="Amount: "
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/textView51"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/textView49"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
