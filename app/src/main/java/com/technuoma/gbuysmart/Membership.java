@@ -11,7 +11,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.razorpay.PaymentResultListener;
 import com.technuoma.gbuysmart.checkoutPOJO.checkoutBean;
+import com.technuoma.gbuysmart.homePOJO.Member;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,8 +25,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Membership extends AppCompatActivity {
+public class Membership extends AppCompatActivity implements PaymentResultListener {
 
+    private static final String TAG = "Membership";
     Toolbar toolbar;
     Button green, gold, platinum;
     ProgressBar progress;
@@ -32,6 +38,8 @@ public class Membership extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membership);
+
+        com.razorpay.Checkout.preload(getApplicationContext());
 
         toolbar = findViewById(R.id.toolbar2);
         green = findViewById(R.id.button3);
@@ -57,7 +65,8 @@ public class Membership extends AppCompatActivity {
             public void onClick(View view) {
 
                 membership = "green";
-                buyMembership();
+                pay("500");
+
 
             }
         });
@@ -67,7 +76,7 @@ public class Membership extends AppCompatActivity {
             public void onClick(View view) {
 
                 membership = "gold";
-                buyMembership();
+                pay("3000");
 
             }
         });
@@ -78,12 +87,63 @@ public class Membership extends AppCompatActivity {
             public void onClick(View view) {
 
                 membership = "platinum";
-                buyMembership();
+                pay("5000");
 
             }
         });
 
 
+    }
+
+
+    void pay(String amount) {
+        progress.setVisibility(View.VISIBLE);
+
+        Bean b = (Bean) getApplicationContext();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseurl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+        Call<payBean> call1 = cr.getOrderId(String.valueOf(Float.parseFloat(amount) * 100), membership);
+
+        call1.enqueue(new Callback<payBean>() {
+            @Override
+            public void onResponse(Call<payBean> call, Response<payBean> response) {
+
+                com.razorpay.Checkout checkout = new com.razorpay.Checkout();
+                checkout.setKeyID("rzp_live_R9U1AGFiyxMvSS");
+                checkout.setImage(R.drawable.back);
+
+                try {
+                    JSONObject options = new JSONObject();
+
+                    options.put("name", "S A Enterprises");
+                    options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+                    options.put("order_id", response.body().getId());//from response of step 3.
+                    options.put("theme.color", "#3399cc");
+                    options.put("currency", "INR");
+                    options.put("amount", String.valueOf(response.body().getAmount() * 100));//pass amount in currency subunits
+                    //options.put("prefill.email", "gaurav.kumar@example.com");
+                    options.put("prefill.contact", SharePreferenceUtils.getInstance().getString("phone"));
+                    checkout.open(Membership.this, options);
+                } catch (Exception e) {
+                    Log.e("Membership", "Error in starting Razorpay Checkout", e);
+                }
+
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<payBean> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -151,7 +211,7 @@ public class Membership extends AppCompatActivity {
 
     }
 
-    void buyMembership() {
+    void buyMembership(String s) {
         progress.setVisibility(View.VISIBLE);
 
         Bean b = (Bean) getApplicationContext();
@@ -167,7 +227,7 @@ public class Membership extends AppCompatActivity {
         Call<checkoutBean> call = cr.buyMembership(
                 SharePreferenceUtils.getInstance().getString("userId"),
                 membership,
-                "etsaasdasd"
+                s
         );
 
         call.enqueue(new Callback<checkoutBean>() {
@@ -185,4 +245,22 @@ public class Membership extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onPaymentSuccess(String s) {
+
+        Log.e(TAG, "Exception in onPaymentError" + s);
+
+        buyMembership(s);
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Log.e(TAG, "Exception in onPaymentError" + s);
+        try {
+            Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onPaymentError", e);
+        }
+    }
 }
