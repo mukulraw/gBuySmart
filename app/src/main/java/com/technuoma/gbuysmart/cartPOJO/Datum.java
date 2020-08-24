@@ -19,6 +19,18 @@ public class Datum {
     @SerializedName("price")
     @Expose
     private String price;
+    @SerializedName("gst")
+    @Expose
+    private String gst;
+    @SerializedName("green")
+    @Expose
+    private String green;
+    @SerializedName("gold")
+    @Expose
+    private String gold;
+    @SerializedName("platinum")
+    @Expose
+    private String platinum;
     @SerializedName("quantity")
     @Expose
     private String quantity;
@@ -69,6 +81,38 @@ public class Datum {
         this.price = price;
     }
 
+    public String getGst() {
+        return gst;
+    }
+
+    public void setGst(String gst) {
+        this.gst = gst;
+    }
+
+    public String getGreen() {
+        return green;
+    }
+
+    public void setGreen(String green) {
+        this.green = green;
+    }
+
+    public String getGold() {
+        return gold;
+    }
+
+    public void setGold(String gold) {
+        this.gold = gold;
+    }
+
+    public String getPlatinum() {
+        return platinum;
+    }
+
+    public void setPlatinum(String platinum) {
+        this.platinum = platinum;
+    }
+
     public String getQuantity() {
         return quantity;
     }
@@ -92,4 +136,5 @@ public class Datum {
     public void setCreated(String created) {
         this.created = created;
     }
+
 }

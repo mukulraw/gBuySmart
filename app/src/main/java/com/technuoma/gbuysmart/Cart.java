@@ -60,11 +60,18 @@ public class Cart extends Fragment {
 
     String client, txn;
     MainActivity mainActivity;
+
+    String membership;
+
+    TextView amount, gst, member, delivery, grand;
+    float del = 25;
+    float gs = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_cart , container , false);
-        mainActivity = (MainActivity)getActivity();
+        View view = inflater.inflate(R.layout.activity_cart, container, false);
+        mainActivity = (MainActivity) getActivity();
         list = new ArrayList<>();
 
         bar = view.findViewById(R.id.progressBar3);
@@ -73,6 +80,11 @@ public class Cart extends Fragment {
         bproceed = view.findViewById(R.id.textView10);
         grid = view.findViewById(R.id.grid);
         clear = view.findViewById(R.id.textView12);
+        grand = view.findViewById(R.id.textView74);
+        amount = view.findViewById(R.id.textView70);
+        gst = view.findViewById(R.id.textView76);
+        member = view.findViewById(R.id.textView78);
+        delivery = view.findViewById(R.id.textView71);
 
 
         adapter = new CartAdapter(list, mainActivity);
@@ -130,21 +142,18 @@ public class Cart extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (amm > 0)
-                {
-                    Intent intent = new Intent(mainActivity , Checkout.class);
-                    intent.putExtra("amount" , String.valueOf(amm));
+                if (amm > 0) {
+                    Intent intent = new Intent(mainActivity, Checkout.class);
+                    intent.putExtra("amount", String.valueOf(amm));
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     Toast.makeText(mainActivity, "Invalid amount", Toast.LENGTH_SHORT).show();
                 }
 
 
-
             }
         });
+
 
         return view;
     }
@@ -154,7 +163,44 @@ public class Cart extends Fragment {
     public void onResume() {
         super.onResume();
 
-        loadCart();
+        bar.setVisibility(View.VISIBLE);
+
+        Bean b = (Bean) mainActivity.getApplicationContext();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.baseurl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+        Call<getMembershipBean> call = cr.getMembership(SharePreferenceUtils.getInstance().getString("userId"));
+
+        call.enqueue(new Callback<getMembershipBean>() {
+            @Override
+            public void onResponse(Call<getMembershipBean> call, Response<getMembershipBean> response) {
+
+                if (response.body().getStatus().equals("1")) {
+                    String type = response.body().getCurrentMembership();
+
+                    membership = type;
+
+                } else {
+                    membership = "";
+                }
+
+                loadCart();
+
+                bar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<getMembershipBean> call, Throwable t) {
+                bar.setVisibility(View.GONE);
+            }
+        });
+
 
     }
 
@@ -188,8 +234,19 @@ public class Cart extends Fragment {
 
                     amm = Float.parseFloat(response.body().getTotal());
 
+                    if (amm >= 1000) {
+                        del = 0;
+                    } else {
+                        del = 25;
+                    }
+
+                    gs = Float.parseFloat(response.body().getTotalgstamount());
+
+                    delivery.setText("₹ " + del);
+                    gst.setText("₹ " + gs);
 
                     btotal.setText("Total: \u20B9 " + response.body().getTotal());
+                    amount.setText("\u20B9 " + response.body().getTotal());
 
                     bottom.setVisibility(View.VISIBLE);
                 } else {
@@ -363,10 +420,6 @@ public class Cart extends Fragment {
             });
 
 
-
-
-
-
             viewHolder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -418,7 +471,7 @@ public class Cart extends Fragment {
 
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
             ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage() , viewHolder.imageView , options);
+            loader.displayImage(item.getImage(), viewHolder.imageView, options);
 
         }
 
@@ -433,7 +486,7 @@ public class Cart extends Fragment {
             ImageButton delete;
 
             Button add, remove;
-            TextView quantity , title , brand , price;
+            TextView quantity, title, brand, price;
 
 
             ViewHolder(@NonNull View itemView) {

@@ -18,6 +18,18 @@ public class cartBean {
     @SerializedName("items")
     @Expose
     private String items;
+    @SerializedName("totalgstamount")
+    @Expose
+    private String totalgstamount;
+    @SerializedName("totalgreenamount")
+    @Expose
+    private String totalgreenamount;
+    @SerializedName("totalgoldamount")
+    @Expose
+    private String totalgoldamount;
+    @SerializedName("totalplatinumamount")
+    @Expose
+    private String totalplatinumamount;
     @SerializedName("data")
     @Expose
     private List<Datum> data = null;
@@ -52,6 +64,38 @@ public class cartBean {
 
     public void setItems(String items) {
         this.items = items;
+    }
+
+    public String getTotalgstamount() {
+        return totalgstamount;
+    }
+
+    public void setTotalgstamount(String totalgstamount) {
+        this.totalgstamount = totalgstamount;
+    }
+
+    public String getTotalgreenamount() {
+        return totalgreenamount;
+    }
+
+    public void setTotalgreenamount(String totalgreenamount) {
+        this.totalgreenamount = totalgreenamount;
+    }
+
+    public String getTotalgoldamount() {
+        return totalgoldamount;
+    }
+
+    public void setTotalgoldamount(String totalgoldamount) {
+        this.totalgoldamount = totalgoldamount;
+    }
+
+    public String getTotalplatinumamount() {
+        return totalplatinumamount;
+    }
+
+    public void setTotalplatinumamount(String totalplatinumamount) {
+        this.totalplatinumamount = totalplatinumamount;
     }
 
     public List<Datum> getData() {
