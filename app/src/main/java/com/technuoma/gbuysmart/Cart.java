@@ -66,6 +66,8 @@ public class Cart extends Fragment {
     TextView amount, gst, member, delivery, grand;
     float del = 25;
     float gs = 0;
+    float mem = 0;
+    float gt = 0;
 
     @Nullable
     @Override
@@ -242,10 +244,24 @@ public class Cart extends Fragment {
 
                     gs = Float.parseFloat(response.body().getTotalgstamount());
 
+                    if (membership.equals("green")) {
+                        mem = Float.parseFloat(response.body().getTotalgreenamount());
+                    } else if (membership.equals("gold")) {
+                        mem = Float.parseFloat(response.body().getTotalgoldamount());
+                    } else if (membership.equals("platinum")) {
+                        mem = Float.parseFloat(response.body().getTotalplatinumamount());
+                    } else {
+                        mem = 0;
+                    }
+
                     delivery.setText("₹ " + del);
                     gst.setText("₹ " + gs);
+                    member.setText("₹ " + mem);
 
-                    btotal.setText("Total: \u20B9 " + response.body().getTotal());
+                    gt = amm + gs - mem + del;
+                    grand.setText("₹ " + gt);
+
+                    btotal.setText("Total: \u20B9 " + gt);
                     amount.setText("\u20B9 " + response.body().getTotal());
 
                     bottom.setVisibility(View.VISIBLE);
