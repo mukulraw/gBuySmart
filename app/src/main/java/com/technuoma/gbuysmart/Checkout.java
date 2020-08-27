@@ -78,6 +78,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
     int del = 25;
 
+    String actual_amount;
+    String gst;
+    String membership_discount;
+    String delivery1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
         adlist = new ArrayList<>();
 
         amm = getIntent().getStringExtra("amount");
+        actual_amount = getIntent().getStringExtra("actual_amount");
+        gst = getIntent().getStringExtra("gst");
+        membership_discount = getIntent().getStringExtra("membership_discount");
+        delivery1 = getIntent().getStringExtra("delivery");
 
         toolbar = findViewById(R.id.toolbar4);
         delivery = findViewById(R.id.textView50);
@@ -480,6 +488,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                                                             SharePreferenceUtils.getInstance().getString("lat"),
                                                             SharePreferenceUtils.getInstance().getString("lng"),
                                                             gtotal,
+                                                            actual_amount,
+                                                            gst,
+                                                            membership_discount,
+                                                            delivery1,
                                                             oid,
                                                             n,
                                                             adr,
@@ -680,6 +692,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                     SharePreferenceUtils.getInstance().getString("lat"),
                     SharePreferenceUtils.getInstance().getString("lng"),
                     gtotal,
+                    actual_amount,
+                    gst,
+                    membership_discount,
+                    delivery1,
                     oid,
                     n,
                     adr,
@@ -920,6 +936,10 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                     SharePreferenceUtils.getInstance().getString("lat"),
                     SharePreferenceUtils.getInstance().getString("lng"),
                     gtotal,
+                    actual_amount,
+                    gst,
+                    membership_discount,
+                    delivery1,
                     s,
                     n,
                     adr,

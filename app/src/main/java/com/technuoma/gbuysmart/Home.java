@@ -183,8 +183,7 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getContext(), Search.class);
-                startActivity(intent);
+                mainActivity.navigation.setSelectedItemId(R.id.action_search);
 
             }
         });

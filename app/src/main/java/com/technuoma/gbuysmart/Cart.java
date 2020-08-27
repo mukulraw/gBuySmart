@@ -147,6 +147,10 @@ public class Cart extends Fragment {
                 if (amm > 0) {
                     Intent intent = new Intent(mainActivity, Checkout.class);
                     intent.putExtra("amount", String.valueOf(gt));
+                    intent.putExtra("actual_amount", String.valueOf(amm));
+                    intent.putExtra("gst", String.valueOf(gs));
+                    intent.putExtra("membership_discount", String.valueOf(mem));
+                    intent.putExtra("delivery", String.valueOf(del));
                     startActivity(intent);
                 } else {
                     Toast.makeText(mainActivity, "Invalid amount", Toast.LENGTH_SHORT).show();
