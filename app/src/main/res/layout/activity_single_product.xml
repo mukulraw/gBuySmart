@@ -58,7 +58,7 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/btn_back_round"
                             android:padding="5dp"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:id="@+id/discount"
                             android:textColor="#fff" />
 

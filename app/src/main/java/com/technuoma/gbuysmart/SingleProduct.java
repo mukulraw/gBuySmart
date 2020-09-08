@@ -223,20 +223,17 @@ public class SingleProduct extends Fragment {
 
                     if (dis > 0) {
 
-    /*                    float pri = Float.parseFloat(item.getPrice());
-                        float dv = (dis / 100 ) * pri;
+                        float dv = (dis / mrp) * 100;
 
-                        float nv = pri - dv;
-*/
                         nv1 = String.valueOf(item.getDiscount());
-/*
+
                         discount.setVisibility(View.VISIBLE);
-                        discount.setText(item.getDiscount() + "% OFF");*/
+                        discount.setText(Math.round(dv) + "% OFF");
                         price.setText(Html.fromHtml("<font color=\"#000000\"><b>\u20B9 " + nv1 + " </b></font><strike>\u20B9 " + item.getPrice() + "</strike>"));
                     } else {
 
                         nv1 = item.getPrice();
-                        //                      discount.setVisibility(View.GONE);
+                        discount.setVisibility(View.GONE);
                         price.setText(Html.fromHtml("<font color=\"#000000\"><b>\u20B9 " + String.valueOf(item.getPrice()) + " </b></font>"));
                     }
 

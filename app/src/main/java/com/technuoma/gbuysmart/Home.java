@@ -785,16 +785,12 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
             holder.size.setText(item.getSize());
 
             if (dis > 0) {
-/*
-                float pri = Float.parseFloat(item.getPrice());
-                float dv = (dis / 100) * pri;
 
-                float nv = pri - dv;
-
+                float dv = (dis / mrp) * 100;
 
 
                 holder.discount.setVisibility(View.VISIBLE);
-                holder.discount.setText(item.getDiscount() + "% OFF");*/
+                holder.discount.setText(Math.round(dv) + "% OFF");
 
                 nv1 = String.valueOf(item.getDiscount());
 
@@ -804,7 +800,7 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
             } else {
 
                 nv1 = item.getPrice();
-                //holder.discount.setVisibility(View.GONE);
+                holder.discount.setVisibility(View.GONE);
                 holder.price.setText("\u20B9 " + item.getDiscount());
                 holder.newamount.setVisibility(View.GONE);
             }
