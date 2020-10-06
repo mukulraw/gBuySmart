@@ -241,9 +241,8 @@ public class SingleProduct extends Fragment {
                     title.setText(item.getName());
 
                     brand.setText(item.getBrand());
-                    unit.setText(item.getUnit());
+                    unit.setText(item.getSize());
                     seller.setText(item.getSeller());
-
                     description.setText(item.getDescription());
                     key_features.setText(item.getKeyFeatures());
                     packaging.setText(item.getPackagingType());
