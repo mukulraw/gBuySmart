@@ -83,6 +83,8 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
     String membership_discount;
     String delivery1;
 
+    TextView promotext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +105,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
         delivery1 = getIntent().getStringExtra("delivery");
 
         toolbar = findViewById(R.id.toolbar4);
+        promotext = findViewById(R.id.textView79);
         delivery = findViewById(R.id.textView50);
         name = findViewById(R.id.editText2);
         address = findViewById(R.id.editText3);
@@ -157,6 +160,8 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
         gtotal = String.valueOf(gt);
 
+
+        address.setText(SharePreferenceUtils.getInstance().getString("deliveryLocation"));
 
         progress.setVisibility(View.VISIBLE);
 
@@ -396,13 +401,16 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
 
                                 pid = response.body().getData().getPid();
 
+                                promotext.setText("PROMO Code applied for ₹ " + da);
+                                promotext.setVisibility(View.VISIBLE);
+
                                 Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                             } else {
                                 Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 apply.setEnabled(true);
                                 apply.setClickable(true);
-
+                                promotext.setVisibility(View.GONE);
                                 promo.setEnabled(true);
                                 promo.setClickable(true);
                             }
@@ -416,7 +424,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                             progress.setVisibility(View.GONE);
                             apply.setEnabled(true);
                             apply.setClickable(true);
-
+                            promotext.setVisibility(View.GONE);
                             promo.setEnabled(true);
                             promo.setClickable(true);
                         }

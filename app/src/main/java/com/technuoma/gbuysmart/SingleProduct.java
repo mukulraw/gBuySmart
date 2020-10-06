@@ -250,12 +250,12 @@ public class SingleProduct extends Fragment {
                     life.setText(item.getShelfLife());
                     disclaimer.setText(item.getDisclaimer());
 
-
                     if (item.getStock().equals("In stock")) {
-                        add.setEnabled(true);
+                        add.setVisibility(View.VISIBLE);
                     } else {
-                        add.setEnabled(false);
+                        add.setVisibility(View.GONE);
                     }
+
 
                     stock.setText(item.getStock());
 

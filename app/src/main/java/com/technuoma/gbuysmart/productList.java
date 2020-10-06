@@ -160,9 +160,9 @@ public class productList extends Fragment {
 
 
             if (item.getStock().equals("In stock")) {
-                holder.add.setEnabled(true);
+                holder.add.setVisibility(View.VISIBLE);
             } else {
-                holder.add.setEnabled(false);
+                holder.add.setVisibility(View.GONE);
             }
 
             holder.stock.setText(item.getStock());

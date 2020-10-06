@@ -493,6 +493,7 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
 
                         Log.d("address", addresses.toString());
 
+                        SharePreferenceUtils.getInstance().saveString("deliveryLocation", addresses.get(0).getAddressLine(0));
                         mainActivity.location.setText(addresses.get(0).getAddressLine(0));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -776,9 +777,9 @@ public class Home extends Fragment implements ResultCallback<LocationSettingsRes
             final String nv1;
 
             if (item.getStock().equals("In stock")) {
-                holder.add.setEnabled(true);
+                holder.add.setVisibility(View.VISIBLE);
             } else {
-                holder.add.setEnabled(false);
+                holder.add.setVisibility(View.GONE);
             }
 
             holder.stock.setText(item.getStock());
